@@ -1,0 +1,18 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">URL</th>
+            <th scope="col">Last Updated</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for check in outbound_checks %}
+            <tr class="{% if check.ok %}table-success{% else %}table-danger{% endif %}">
+                <th scope="row">{{ check.name }}</th>
+                <td>{{ check.url }}</td>
+                <td>{{ check.last_updated }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

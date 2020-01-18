@@ -1,18 +1,16 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for name, ok in checks.items() %}
-                <tr class="{% if ok %}table-success{% else %}table-danger{% endif %}">
-                    <th scope="row">{{ name }}</th>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6">
+                <h1 align="center">Inbound</h1>
+                {% include "_inbound_table.html" %}
+            </div>
+            <div class="col-xs-6">
+                <h1 align="center">Outbound</h1>
+                {% include "_outbound_table.html" %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
