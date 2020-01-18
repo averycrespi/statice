@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "statice"
+version = "0.1.0"
+description = ""
+authors = ["Avery Crespi <averycrespi@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+flask = "^1.1.1"
+flask-wtf = "^0.14.2"
+flask-sqlalchemy = "^2.4.1"
+flask-nav = "^0.6"
+flask-bootstrap = "^3.3.7"
+requests = "^2.22.0"
+
+[tool.poetry.dev-dependencies]
+python-dotenv = "^0.10.4"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
