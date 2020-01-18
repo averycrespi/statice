@@ -1,5 +1,18 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-	<div class="alert alert-success" role="alert">A simple success alert—check it out!</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for name, ok in checks.items() %}
+                <tr class="{% if ok %}table-success{% else %}table-danger{% endif %}">
+                    <th scope="row">{{ name }}</th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

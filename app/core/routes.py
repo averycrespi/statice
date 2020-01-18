@@ -6,4 +6,8 @@ from app.core import bp
 @bp.route("/")
 @bp.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html")
+    checks = {
+        "foo": True,
+        "bar": False,
+    }
+    return render_template("dashboard.html", checks=checks)
