@@ -1,10 +1,14 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
 
 from config import Config
 
 
 bootstrap = Bootstrap()
+db = SQLAlchemy()
+migrate = Migrate()
 
 
 def create_app(config=Config):
@@ -12,9 +16,14 @@ def create_app(config=Config):
     app.config.from_object(config)
 
     bootstrap.init_app(app)
+    db.init_app(app)
+    migrate.init_app(app, db)
 
-    from app.core import bp as core_bp
+    from app.dashboard import bp as dashboard_bp
 
-    app.register_blueprint(core_bp)
+    app.register_blueprint(dashboard_bp)
 
     return app
+
+
+from app import models
