@@ -3,6 +3,7 @@
         <tr>
             <th scope="col">Name</th>
             <th scope="col">URL</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -10,10 +11,11 @@
             <tr class="table-info">
                 <th scope="row">{{ check.name }}</th>
                 <td>{{ check.url }}</td>
+                <td><a class="btn btn-primary" href="{{ url_for("checks.view_outbound_check", id=check.id) }}">View</th>
             </tr>
         {% endfor %}
         <tr>
-            <td><a class="btn btn-primary" href="{{ url_for("checks.create_outbound_check") }}">New</a></td>
+            <td><a class="btn btn-success" href="{{ url_for("checks.create_outbound_check") }}">New</a></td>
         </tr>
     </tbody>
 </table>

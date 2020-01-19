@@ -13,3 +13,7 @@ class CreateOutboundCheckForm(FlaskForm):
     def validate_name(self, name):
         if OutboundCheck.query.filter_by(name=name.data).first():
             raise ValidationError("Please use a different name.")
+
+
+class DeleteOutboundCheckForm(FlaskForm):
+    delete = SubmitField("Delete")

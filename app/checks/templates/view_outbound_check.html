@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    {% if outbound_check %}
+        <div align="center">
+            <h1>{{ outbound_check.name }}<h1>
+            <a class="btn btn-primary" href="#">Edit</a>
+            <a class="btn btn-danger" href="{{ url_for("checks.delete_outbound_check", id=outbound_check.id) }}">Delete</a>
+        </div>
+    {% else %}
+        <p>Check not found.<p>
+    {% endif %}
+{% endblock %}
