@@ -1,6 +1,5 @@
 from flask import render_template
 
-from app import db
 from app.dashboard import bp
 from app.models import OutboundCheck
 

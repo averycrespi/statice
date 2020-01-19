@@ -12,5 +12,8 @@
                 <td>{{ check.url }}</td>
             </tr>
         {% endfor %}
+        <tr>
+            <td><a class="btn btn-primary" href="{{ url_for("checks.create_outbound_check") }}">New</a></td>
+        </tr>
     </tbody>
 </table>
