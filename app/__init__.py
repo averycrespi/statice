@@ -19,11 +19,11 @@ def create_app(config=Config):
     db.init_app(app)
     migrate.init_app(app, db)
 
-    from app.checks import bp as checks_bp
     from app.dashboard import bp as dashboard_bp
+    from app.settings import bp as settings_bp
 
-    app.register_blueprint(checks_bp, url_prefix="/checks")
     app.register_blueprint(dashboard_bp)
+    app.register_blueprint(settings_bp)
 
     return app
 

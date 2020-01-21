@@ -1,5 +1,5 @@
 from app import create_app, db
-from app.models import OutboundCheck
+from app.models import Check
 
 
 app = create_app()
@@ -7,4 +7,4 @@ app = create_app()
 
 @app.shell_context_processor
 def make_shell_context():
-    return {"db": db, "OutboundCheck": OutboundCheck}
+    return {"db": db, "Check": Check}
