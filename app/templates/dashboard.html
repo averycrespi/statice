@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <div align="center">
+        <h1>{{ title }}<h1>
+    </div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6" align="center">
+        		<h2>Checks</h2>
+        		{% include "_checks_table.html" %}
+			</div>
+			<div class="col-xs-6" align="center">
+        		<h2>Events</h2>
+        		{% include "_events_table.html" %}
+			</div>
+		</div>
+	</div>
+{% endblock %}
