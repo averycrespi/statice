@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="{{ url_for("static", filename="darkly.min.css") }}">
 {% endblock %}
 
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+{% endblock %}
+
 {% block navbar %}
     <nav class="navbar navbar-expand navbar-dark bg-dark">
         <a class="navbar-brand" href="/">Statice</a>
