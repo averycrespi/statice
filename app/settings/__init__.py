@@ -1,7 +1,7 @@
 from flask import Blueprint
 
 
-bp = Blueprint("settings", __name__, template_folder="templates")
+bp = Blueprint("settings", __name__)
 
 
 from app.settings import routes
