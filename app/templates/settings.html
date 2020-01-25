@@ -3,18 +3,18 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block app_content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-9" align="center">
-                <h1>Manage checks</h1>
-                <div class="border bg-light">
-        		    {% include "_settings_table.html" %}
-                </div>
-            </div>
-            <div class="col-xs-3">
-        		<h1>Create check</h1>
-                {{ wtf.quick_form(form, button_map={"submit": "success"}) }}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-9" align="center">
+            <h1>Manage checks</h1>
+            <div class="border bg-light">
+                {% include "_manage.html" %}
             </div>
         </div>
+        <div class="col-xs-3">
+            <h1>Create check</h1>
+            {{ wtf.quick_form(form, button_map={"submit": "success"}) }}
+        </div>
     </div>
+</div>
 {% endblock %}
