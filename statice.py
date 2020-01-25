@@ -1,10 +1,11 @@
-from app import create_app, db
-from app.models import Check, Event
+from app import cli, create_app, db
+from app.models import Check
 
 
 app = create_app()
+cli.register(app)
 
 
 @app.shell_context_processor
 def make_shell_context():
-    return {"db": db, "Check": Check, "Event": Event}
+    return {"db": db, "Check": Check}
