@@ -1,24 +1,24 @@
-RUN=poetry run
+ENV=poetry run
 
 .PHONY: all
 all: run
 
 .PHONY: init-db
 init-db:
-	$(RUN) flask db init
+	$(ENV) flask db init
 
 .PHONY: migrate-db
 migrate-db:
-	$(RUN) flask db migrate
+	$(ENV) flask db migrate
 
 .PHONY: upgrade-db
 upgrade-db:
-	$(RUN) flask db upgrade
+	$(ENV) flask db upgrade
 
 .PHONY: run
 run:
-	$(RUN) flask run
+	$(ENV) flask run
 
 .PHONY: shell
 shell:
-	$(RUN) flask shell
+	$(ENV) flask shell
