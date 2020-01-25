@@ -25,7 +25,7 @@ class Check(db.Model):  # type: ignore
     url = db.Column(db.String())
     status = db.Column(db.String())
 
-    period = db.Column(db.Integer)
+    interval = db.Column(db.Integer)
     retries = db.Column(db.Integer)
     timeout = db.Column(db.Integer)
 

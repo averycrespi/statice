@@ -20,7 +20,7 @@ def register(app):
                 name=faker.word().title(),
                 url=faker.uri(),
                 status=faker.random_element(categories),
-                period=faker.random_int(min=1, max=60),
+                interval=faker.random_int(min=1, max=60),
                 retries=faker.random_int(min=0, max=5),
                 timeout=faker.random_int(min=3, max=10),
             )
