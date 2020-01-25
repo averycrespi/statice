@@ -3,17 +3,25 @@ ENV=poetry run
 .PHONY: all
 all: run
 
-.PHONY: init-db
-init-db:
+.PHONY: fake
+fake:
+	$(ENV) flask fake ${COUNT}
+
+.PHONY: init
+init:
 	$(ENV) flask db init
 
-.PHONY: migrate-db
-migrate-db:
+.PHONY: migrate
+migrate:
 	$(ENV) flask db migrate
 
-.PHONY: upgrade-db
-upgrade-db:
+.PHONY: upgrade
+upgrade:
 	$(ENV) flask db upgrade
+
+.PHONY: reset
+reset:
+	$(ENV) flask reset
 
 .PHONY: run
 run:

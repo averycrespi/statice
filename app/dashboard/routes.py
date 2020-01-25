@@ -7,4 +7,4 @@ from app.models import Check
 @bp.route("/")
 @bp.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html", checks=Check.query.all(),)
+    return render_template("dashboard.html", checks=Check.query.all())
