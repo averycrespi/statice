@@ -37,6 +37,8 @@ def edit(id):
         return render_template("404.html")
     form = EditCheckForm(obj=check)
     if form.validate_on_submit():
+        if form.cancel.data:
+            return redirect(url_for("checks.checks"))
         check.name = form.name.data
         check.url = form.url.data
         check.interval = form.interval.data
@@ -56,6 +58,8 @@ def delete(id):
         return render_template("404.html")
     form = DeleteCheckForm()
     if form.validate_on_submit():
+        if form.cancel.data:
+            return redirect(url_for("checks.checks"))
         # TODO: implement cascade deletion
         db.session.delete(check)
         db.session.commit()

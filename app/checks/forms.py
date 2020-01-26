@@ -38,7 +38,9 @@ class CreateCheckForm(CheckForm):
 
 class EditCheckForm(CheckForm):
     submit = SubmitField("Save")
+    cancel = SubmitField("Cancel")
 
 
 class DeleteCheckForm(FlaskForm):
     submit = SubmitField("Delete")
+    cancel = SubmitField("Cancel")

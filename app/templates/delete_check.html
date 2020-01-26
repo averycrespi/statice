@@ -5,5 +5,5 @@
 {% block app_content %}
     <h1>Are you sure that you want to delete {{ check.name }}?</h1>
     <h3>This action cannot be undone.</h3>
-    {{ wtf.quick_form(form, button_map={"submit": "danger"}) }}
+    {{ wtf.quick_form(form, button_map={"submit": "danger", "cancel": "secondary"}) }}
 {% endblock %}
