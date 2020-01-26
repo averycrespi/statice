@@ -16,8 +16,7 @@
                 <div class="card-body">
                     <table class="table">
                         <tbody>
-                            {# TODO: find a way to limit events #}
-                            {% for event in check.events | sort(attribute="time", reverse=True) %}
+                            {% for event in check.events %}
                             <tr>
                                 <td>
                                     <span>{{ event.message }}</span>

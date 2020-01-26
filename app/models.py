@@ -41,6 +41,10 @@ class Event(db.Model):  # type: ignore
     message = db.Column(db.String())
     time = db.Column(db.DateTime, default=datetime.utcnow, index=True)
 
+    def __lt__(self, other):
+        # Sort events by timestamp.
+        return self.time < other.time
+
 
 class Response(db.Model):  # type: ignore
     id = db.Column(db.Integer, primary_key=True)

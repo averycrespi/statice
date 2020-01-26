@@ -7,4 +7,8 @@ from app.models import Check
 @bp.route("/")
 @bp.route("/dashboard")
 def dashboard():
+    checks = Check.query.all()
+    for check in checks:
+        # TODO: refactor magic number
+        check.events = sorted(check.events, reverse=True)[:3]
     return render_template("dashboard.html", checks=Check.query.all())
