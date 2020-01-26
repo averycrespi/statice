@@ -1,13 +1,13 @@
 from flask_wtf import FlaskForm
 from wtforms import IntegerField, StringField, SubmitField
-from wtforms.validators import DataRequired, NumberRange, ValidationError
+from wtforms.validators import DataRequired, NumberRange, ValidationError, URL
 
 from app.models import Check
 
 
 class CheckForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
-    url = StringField("URL", validators=[DataRequired()])
+    url = StringField("URL", validators=[DataRequired(), URL()])
     interval = IntegerField(
         "Interval",
         description="Wait this many seconds between requests",

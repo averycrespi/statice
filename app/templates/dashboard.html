@@ -6,9 +6,9 @@
         {% for check in checks %}
         <div class="col-xs-3 m-3">
             <div class="card border-{{ check.status }}">
-                <h3 class="card-header">{{ check.name }}</h1>
+                <h3 class="card-header text-{{ check.status }}">{{ check.name }}</h1>
                 <div class="card-body">
-                    <h6 class="card-subtitle text-muted">{{ check.url }}</h1>
+                    <a class="card-subtitle text-muted" href="{{ check.url }}">{{ check.url }}</a>
                 </div>
                 <div class="card-body">
                     <div class="alert alert-primary" role="alert">TODO: add chart</div>

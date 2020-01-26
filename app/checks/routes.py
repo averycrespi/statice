@@ -1,7 +1,7 @@
 from flask import flash, redirect, render_template, url_for
 
 from app import db
-from app.models import Category, Check
+from app.models import Category, Check, Event
 from app.checks import bp
 from app.checks.forms import CreateCheckForm, DeleteCheckForm, EditCheckForm
 
