@@ -23,10 +23,10 @@ def create_app(config=Config):
     moment.init_app(app)
 
     from app.dashboard import bp as dashboard_bp
-    from app.settings import bp as settings_bp
+    from app.checks import bp as checks_bp
 
     app.register_blueprint(dashboard_bp)
-    app.register_blueprint(settings_bp)
+    app.register_blueprint(checks_bp)
 
     return app
 

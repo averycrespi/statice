@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 3457496a6fbd
+Revision ID: 42e4bb8d47b4
 Revises: 
-Create Date: 2020-01-25 12:09:24.359716
+Create Date: 2020-01-25 22:16:00.312660
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3457496a6fbd'
+revision = '42e4bb8d47b4'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,7 +23,7 @@ def upgrade():
     sa.Column('name', sa.String(), nullable=True),
     sa.Column('url', sa.String(), nullable=True),
     sa.Column('status', sa.String(), nullable=True),
-    sa.Column('period', sa.Integer(), nullable=True),
+    sa.Column('interval', sa.Integer(), nullable=True),
     sa.Column('retries', sa.Integer(), nullable=True),
     sa.Column('timeout', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
@@ -38,7 +38,7 @@ def upgrade():
     )
     op.create_table('event',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('check_id', sa.Integer(), nullable=False),
+    sa.Column('check_id', sa.Integer(), nullable=True),
     sa.Column('category', sa.String(), nullable=True),
     sa.Column('message', sa.String(), nullable=True),
     sa.Column('time', sa.DateTime(), nullable=True),
@@ -48,7 +48,7 @@ def upgrade():
     op.create_index(op.f('ix_event_time'), 'event', ['time'], unique=False)
     op.create_table('response',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('check_id', sa.Integer(), nullable=False),
+    sa.Column('check_id', sa.Integer(), nullable=True),
     sa.Column('start_time', sa.DateTime(), nullable=True),
     sa.Column('end_time', sa.DateTime(), nullable=True),
     sa.Column('status_code', sa.Integer(), nullable=True),

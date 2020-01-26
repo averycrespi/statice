@@ -4,7 +4,7 @@ import faker.providers.lorem
 import faker.providers.internet
 
 from app import db
-from app.models import Check, Event, Response, User
+from app.models import Category, Check, Event, Response, User
 
 
 def register(app):
@@ -13,25 +13,25 @@ def register(app):
     def fake(count):
         """Add fake data."""
         faker = Faker()
-        categories = ("success", "warning", "danger", "info")
+        print("Faking data ...")
         for i in range(count):
-            print("Faking data ...")
             check = Check(
                 name=faker.word().title(),
                 url=faker.uri(),
-                status=faker.random_element(categories),
-                period=faker.random_int(min=1, max=60),
+                status=faker.random_element((Category.SUCCESS, Category.FAILURE)),
+                interval=faker.random_int(min=1, max=60),
                 retries=faker.random_int(min=0, max=5),
                 timeout=faker.random_int(min=3, max=10),
             )
             db.session.add(check)
             db.session.flush()  # Ensure that check.id is up-to-date.
-            event = Event(
-                check_id=check.id,
-                category=faker.random_element(categories),
-                message=faker.sentence(),
-            )
-            db.session.add(event)
+            for i in range(faker.random_int(min=0, max=4)):
+                event = Event(
+                    check_id=check.id,
+                    category=faker.random_element((Category.SUCCESS, Category.FAILURE)),
+                    message=faker.sentence().strip("."),
+                )
+                db.session.add(event)
         print("Committing changes ...")
         db.session.commit()
         print("Done!")
