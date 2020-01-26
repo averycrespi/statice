@@ -1,9 +1,9 @@
 from flask import flash, redirect, render_template, url_for
 
 from app import db
-from app.models import Category, Check, Event, Response
+from app.models import Category, Check
 from app.checks import bp
-from app.checks.forms import CreateCheckForm, DeleteCheckForm
+from app.checks.forms import CreateCheckForm, DeleteCheckForm, EditCheckForm
 
 
 @bp.route("/checks", methods=["GET", "POST"])
@@ -32,7 +32,21 @@ def checks():
 
 @bp.route("/checks/edit/<id>", methods=["GET", "POST"])
 def edit(id):
-    return render_template("edit_check.html")
+    check = Check.query.filter_by(id=id).first()
+    if check is None:
+        return render_template("404.html")
+    form = EditCheckForm(obj=check)
+    if form.validate_on_submit():
+        check.name = form.name.data
+        check.url = form.url.data
+        check.interval = form.interval.data
+        check.retries = form.retries.data
+        check.timeout = form.timeout.data
+        db.session.add(check)
+        db.session.commit()
+        flash(f"Check {check.name} has been saved.", category=Category.INFO)
+        return redirect(url_for("checks.checks"))
+    return render_template("edit_check.html", form=form)
 
 
 @bp.route("/checks/delete/<id>", methods=["GET", "POST"])

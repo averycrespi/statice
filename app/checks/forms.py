@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired, NumberRange, ValidationError
 from app.models import Check
 
 
-class CreateCheckForm(FlaskForm):
+class CheckForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     url = StringField("URL", validators=[DataRequired()])
     interval = IntegerField(
@@ -26,11 +26,18 @@ class CreateCheckForm(FlaskForm):
         default=5,
         validators=[DataRequired(), NumberRange(min=1)],
     )
+
+
+class CreateCheckForm(CheckForm):
     submit = SubmitField("Create")
 
     def validate_name(self, name):
         if Check.query.filter_by(name=name.data).first() is not None:
             raise ValidationError("Please use a unique check name.")
+
+
+class EditCheckForm(CheckForm):
+    submit = SubmitField("Save")
 
 
 class DeleteCheckForm(FlaskForm):

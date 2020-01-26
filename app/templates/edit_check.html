@@ -3,5 +3,5 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block app_content %}
-    {# TODO #}
+    {{ wtf.quick_form(form, button_map={"submit": "success"}, form_type="horizontal") }}
 {% endblock %}
