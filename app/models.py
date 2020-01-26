@@ -49,3 +49,10 @@ class Response(db.Model):  # type: ignore
     start_time = db.Column(db.DateTime)
     end_time = db.Column(db.DateTime)
     status_code = db.Column(db.Integer)
+
+
+class Category:
+    INFO = "info"
+    WARNING = "warning"
+    FAILURE = "danger"
+    SUCCESS = "success"
