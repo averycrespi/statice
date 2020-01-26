@@ -31,3 +31,7 @@ class CreateCheckForm(FlaskForm):
     def validate_name(self, name):
         if Check.query.filter_by(name=name.data).first() is not None:
             raise ValidationError("Please use a unique check name.")
+
+
+class DeleteCheckForm(FlaskForm):
+    submit = SubmitField("Delete")

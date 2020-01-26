@@ -35,7 +35,7 @@ class Check(db.Model):  # type: ignore
 
 class Event(db.Model):  # type: ignore
     id = db.Column(db.Integer, primary_key=True)
-    check_id = db.Column(db.Integer, db.ForeignKey("check.id"), nullable=False)
+    check_id = db.Column(db.Integer, db.ForeignKey("check.id"))
 
     category = db.Column(db.String())
     message = db.Column(db.String())
@@ -44,7 +44,7 @@ class Event(db.Model):  # type: ignore
 
 class Response(db.Model):  # type: ignore
     id = db.Column(db.Integer, primary_key=True)
-    check_id = db.Column(db.Integer, db.ForeignKey("check.id"), nullable=False)
+    check_id = db.Column(db.Integer, db.ForeignKey("check.id"))
 
     start_time = db.Column(db.DateTime)
     end_time = db.Column(db.DateTime)

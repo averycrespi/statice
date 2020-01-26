@@ -25,8 +25,8 @@
                     <td>{{ check.retries }}</td>
                     <td>{{ check.timeout }}s</td>
                     <td align="right">
-                        <button type="button" class="btn btn-warning">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <a class="btn btn-warning" role="button" href="{{ url_for("checks.edit", id=check.id) }}">Edit</a>
+                        <a class="btn btn-danger" role="button" href="{{ url_for("checks.delete", id=check.id) }}">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}
