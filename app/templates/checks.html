@@ -20,7 +20,9 @@
                 <tbody>
                     {% for check in checks %}
                     <tr class="table">
-                        <th scope="row"><p class="text-{{ check.status }}">{{ check.name }}</p></th>
+                        <th scope="row">
+                            <a class="text-{{ check.status }}" href="{{ url_for("checks.view", id=check.id) }}">{{ check.name }}</a>
+                        </th>
                         <td>{{ check.url }}</td>
                         <td>{{ check.interval }}s</td>
                         <td>{{ check.retries }}</td>

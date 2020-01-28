@@ -1,19 +1,18 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-<div class="card-columns">
-{% for check in checks %}
-    <div class="card border-{{ check.status }}">
-        <h3 class="card-header">
-            <a class="text-{{ check.status }}" href="{{ url_for("checks.view", id=check.id) }}">{{ check.name }}</a>
-        </h1>
-        <div class="card-body">
-            <a class="card-subtitle text-muted" href="{{ check.url }}">{{ check.url }}</a>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-{{ check.status }}">{{ check.name }}</h1>
+            <div class="alert alert-primary" role="alert">TODO: add chart</div>
         </div>
-        <div class="card-body">
+    </div>
+    <div class="row">
+        <div class="col">
             <table class="table">
                 <tbody>
-                    {% for event in check.recent_events %}
+                    {% for event in check.events %}
                     <tr>
                         <td>
                             <span>{{ event.message }}</span>
@@ -25,6 +24,5 @@
             </table>
         </div>
     </div>
-{% endfor %}
 </div>
 {% endblock %}

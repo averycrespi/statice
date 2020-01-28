@@ -30,6 +30,14 @@ def checks():
     return render_template("checks.html", checks=Check.query.all(), form=form)
 
 
+@bp.route("/checks/view/<id>")
+def view(id):
+    check = Check.query.filter_by(id=id).first()
+    if check is None:
+        return render_template("404.html")
+    return render_template("view_check.html", check=check)
+
+
 @bp.route("/checks/edit/<id>", methods=["GET", "POST"])
 def edit(id):
     check = Check.query.filter_by(id=id).first()
