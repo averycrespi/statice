@@ -3,38 +3,42 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block app_content %}
-<ul class="list-group">
-    <li class="list-group-item">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">URL</th>
-                    <th scope="col">Interval</th>
-                    <th scope="col">Retries</th>
-                    <th scope="col">Timeout</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for check in checks %}
-                <tr class="table">
-                    <th scope="row"><p class="text-{{ check.status }}">{{ check.name }}</p></th>
-                    <td>{{ check.url }}</td>
-                    <td>{{ check.interval }}s</td>
-                    <td>{{ check.retries }}</td>
-                    <td>{{ check.timeout }}s</td>
-                    <td align="right">
-                        <a class="btn btn-primary" role="button" href="{{ url_for("checks.edit", id=check.id) }}">Edit</a>
-                        <a class="btn btn-danger" role="button" href="{{ url_for("checks.delete", id=check.id) }}">Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        </li>
-    <li class="list-group-item">
-        {{ wtf.quick_form(form, button_map={"submit": "success"}, form_type="horizontal") }}
-    </li>
-</ul>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">URL</th>
+                        <th scope="col">Interval</th>
+                        <th scope="col">Retries</th>
+                        <th scope="col">Timeout</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for check in checks %}
+                    <tr class="table">
+                        <th scope="row"><p class="text-{{ check.status }}">{{ check.name }}</p></th>
+                        <td>{{ check.url }}</td>
+                        <td>{{ check.interval }}s</td>
+                        <td>{{ check.retries }}</td>
+                        <td>{{ check.timeout }}s</td>
+                        <td align="right">
+                            <a class="btn btn-primary" role="button" href="{{ url_for("checks.edit", id=check.id) }}">Edit</a>
+                            <a class="btn btn-danger" role="button" href="{{ url_for("checks.delete", id=check.id) }}">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {{ wtf.quick_form(form, button_map={"submit": "success"}, form_type="horizontal") }}
+        </div>
+    </div>
+</div>
 {% endblock %}
