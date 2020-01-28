@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "statice"
 version = "0.1.0"
-description = ""
+description = "A friendly status page"
 authors = ["Avery Crespi <averycrespi@gmail.com>"]
 license = "MIT"
 
