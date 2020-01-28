@@ -1,35 +1,31 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-<div class="container">
-    <div class="row">
-        {% for check in checks %}
-        <div class="col-xs-3 m-3">
-            <div class="card border-{{ check.status }}">
-                <h3 class="card-header text-{{ check.status }}">{{ check.name }}</h1>
-                <div class="card-body">
-                    <a class="card-subtitle text-muted" href="{{ check.url }}">{{ check.url }}</a>
-                </div>
-                <div class="card-body">
-                    <div class="alert alert-primary" role="alert">TODO: add chart</div>
-                </div>
-                <div class="card-body">
-                    <table class="table">
-                        <tbody>
-                            {% for event in check.events %}
-                            <tr>
-                                <td>
-                                    <span>{{ event.message }}</span>
-                                    <span class="text-muted">{{ moment(event.time).fromNow() }}</span>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+<div class="card-columns">
+{% for check in checks %}
+    <div class="card border-{{ check.status }}">
+        <h3 class="card-header text-{{ check.status }}">{{ check.name }}</h1>
+        <div class="card-body">
+            <a class="card-subtitle text-muted" href="{{ check.url }}">{{ check.url }}</a>
         </div>
-        {% endfor %}
+        <div class="card-body">
+            <div class="alert alert-primary" role="alert">TODO: add chart</div>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <tbody>
+                    {% for event in check.recent_events %}
+                    <tr>
+                        <td>
+                            <span>{{ event.message }}</span>
+                            <span class="text-muted">{{ moment(event.time).fromNow() }}</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
+{% endfor %}
 </div>
 {% endblock %}

@@ -10,5 +10,5 @@ def dashboard():
     checks = Check.query.all()
     for check in checks:
         # TODO: refactor magic number
-        check.events = sorted(check.events, reverse=True)[:3]
-    return render_template("dashboard.html", checks=Check.query.all())
+        check.recent_events = sorted(check.events, reverse=True)[:3]
+    return render_template("dashboard.html", checks=checks)
