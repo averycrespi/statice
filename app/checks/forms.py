@@ -1,6 +1,12 @@
 from flask_wtf import FlaskForm
 from wtforms import IntegerField, StringField, SubmitField
-from wtforms.validators import DataRequired, NumberRange, ValidationError, URL
+from wtforms.validators import (
+    DataRequired,
+    InputRequired,
+    NumberRange,
+    ValidationError,
+    URL,
+)
 
 from app.models import Check
 
@@ -18,7 +24,8 @@ class CheckForm(FlaskForm):
         "Retries",
         description="Retry this many times before reporting failure",
         default=3,
-        validators=[DataRequired(), NumberRange(min=0)],
+        # DataRequired won't accept "0", so we use InputRequired.
+        validators=[InputRequired(), NumberRange(min=0)],
     )
     timeout = IntegerField(
         "Timeout",
