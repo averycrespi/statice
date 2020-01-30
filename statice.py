@@ -1,11 +1,16 @@
-from app import cli, create_app, db
-from app.models import Check
+from app import create_app, db
+from app.models import User
 
 
 app = create_app()
-cli.register(app)
+with app.app_context():
+    username, password = app.config["ADMIN_USERNAME"], app.config["ADMIN_PASSWORD"]
+    if not User.query.filter_by(username=username).first():
+        admin = User(username=username)
+        admin.set_password(password)
+        db.session.add(admin)
+        db.session.commit()
 
-
-@app.shell_context_processor
-def make_shell_context():
-    return {"db": db, "Check": Check}
+#TODO: remove me!
+from pprint import pprint
+pprint(app.config)

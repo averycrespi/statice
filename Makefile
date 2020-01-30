@@ -1,32 +1,27 @@
-ENV=poetry run
-
 .PHONY: all
-all: run
+all: build run
 
-.PHONY: fake
-fake:
-	$(ENV) flask fake ${COUNT}
+# Build the Docker container.
+.PHONY: build
+build: requirements
+	docker-compose build statice
 
-.PHONY: init
-init:
-	$(ENV) flask db init
+# Stop and remove the Docker container.
+.PHONY: clean
+clean:
+	docker-compose stop statice
+	docker-compose rm -f statice
 
-.PHONY: migrate
-migrate:
-	$(ENV) flask db migrate
+# Rebuild the Docker container.
+.PHONY: rebuild
+rebuild: clean build
 
-.PHONY: upgrade
-upgrade:
-	$(ENV) flask db upgrade
+# Export Poetry requirements.
+.PHONY: requirements
+requirements:
+	poetry export -f requirements.txt > requirements.txt
 
-.PHONY: reset
-reset:
-	$(ENV) flask reset
-
+# Start the Docker containers.
 .PHONY: run
 run:
-	$(ENV) flask run
-
-.PHONY: shell
-shell:
-	$(ENV) flask shell
+	docker-compose up -d
