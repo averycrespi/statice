@@ -28,6 +28,9 @@ def create_app(config=Config):
     app.register_blueprint(dashboard_bp)
     app.register_blueprint(checks_bp)
 
+    with app.app_context():
+        db.create_all()
+
     return app
 
 
