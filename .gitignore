@@ -1,8 +1,4 @@
-# Cache files
 __pycache__/
 .mypy_cache/
 *.egg-info/
-
-# Local data
-*.db
-.env
+requirements.txt
