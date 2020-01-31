@@ -4,13 +4,13 @@ all: build run
 # Build the Docker container.
 .PHONY: build
 build: requirements
-	docker-compose build statice
+	docker-compose build app
 
 # Stop and remove the Docker container.
 .PHONY: clean
 clean:
-	docker-compose stop statice
-	docker-compose rm -f statice
+	docker-compose stop app
+	docker-compose rm -f app
 
 # Rebuild the Docker container.
 .PHONY: rebuild

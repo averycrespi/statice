@@ -1,8 +1,17 @@
 version: '3'
 
 services:
-    statice:
-        container_name: statice
+    app:
         build: .
+        container_name: statice
+        environment:
+            - POSTGRES_URL=statice_db:5432
         ports:
             - "5000:5000"
+
+    db:
+        image: postgres:12
+        container_name: statice_db
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres

@@ -6,16 +6,20 @@ WORKDIR /app
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
-# Configure the virtual environment.
+# Configure virtual environment.
 ENV VIRTUAL_ENV=/opt/venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-# Install dependencies.
+# Install PostgreSQL dependencies.
+RUN apt-get update && apt-get install -y libpq-dev gcc
+
+# Install app dependencies.
 COPY requirements.txt .
 RUN python -m venv $VIRTUAL_ENV
 RUN pip install -r requirements.txt
+RUN apt install
 
-# Copy application files.
+# Copy app files.
 COPY app app
 COPY migrations migrations
 COPY config.py statice.py ./
