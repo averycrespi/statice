@@ -14,6 +14,7 @@ moment = Moment()
 
 
 def create_app(config=Config):
+    """Create an application instance."""
     app = Flask(__name__)
     app.config.from_object(config)
 
