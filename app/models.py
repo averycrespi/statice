@@ -58,3 +58,10 @@ class Status:
     WARNING = "warning"
     FAILURE = "danger"
     SUCCESS = "success"
+
+
+class Card:
+    def __init__(self, check):
+        self.check = check
+        self.recent_events = sorted(check.events, reverse=True)[:3]
+        self.table_data = None

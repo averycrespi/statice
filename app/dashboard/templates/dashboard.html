@@ -2,18 +2,18 @@
 
 {% block app_content %}
 <div class="card-columns">
-{% for check in checks %}
-    <div class="card border-{{ check.status }}">
+{% for card in cards %}
+    <div class="card border-{{ card.check.status }}">
         <h3 class="card-header">
-            <a class="text-{{ check.status }}" href="{{ url_for("checks.view", id=check.id) }}">{{ check.name }}</a>
+            <a class="text-{{ card.check.status }}" href="{{ url_for("checks.view", id=card.check.id) }}">{{ card.check.name }}</a>
         </h1>
         <div class="card-body">
-            <a class="card-subtitle text-muted" href="{{ check.url }}">{{ check.url }}</a>
+            <a class="card-subtitle text-muted" href="{{ card.check.url }}">{{ card.check.url }}</a>
         </div>
         <div class="card-body">
             <table class="table">
                 <tbody>
-                    {% for event in check.recent_events %}
+                    {% for event in card.recent_events %}
                     <tr>
                         <td>
                             <span>{{ event.message }}</span>
