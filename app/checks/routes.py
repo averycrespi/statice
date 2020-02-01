@@ -1,4 +1,4 @@
-from flask import flash, redirect, render_template, url_for
+from flask import current_app, flash, redirect, render_template, url_for
 
 from app import db
 from app.models import Check, Event, Status
@@ -20,6 +20,7 @@ def checks():
         db.session.add(event)
         db.session.commit()
         flash(f"Check {check.name} has been created.", category=Status.INFO)
+        current_app.logger.info("created check: %s", check.name)
         return redirect(url_for("checks.checks"))
     return render_template("checks.html", checks=Check.query.all(), form=form)
 
@@ -48,6 +49,7 @@ def edit(id):
         db.session.add(check)
         db.session.commit()
         flash(f"Check {check.name} has been saved.", category=Status.INFO)
+        current_app.logger.info("saved check: %s", check.name)
         return redirect(url_for("checks.checks"))
     return render_template("edit_check.html", form=form)
 
@@ -65,6 +67,7 @@ def delete(id):
         # TODO: implement cascade deletion
         db.session.delete(check)
         db.session.commit()
-        flash(f"Check {check.name} has been deleted.", category=Status.INFO)
+        flash(f"Check {check.name} has been deleted.", category=Status.WARNING)
+        current_app.logger.warning("deleted check: %s", check.name)
         return redirect(url_for("checks.checks"))
     return render_template("delete_check.html", check=check, form=form)
