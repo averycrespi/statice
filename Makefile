@@ -1,22 +1,28 @@
 .PHONY: all
-all: start
+all: clean build start
 
-# Destroy containers and volumes.
-.PHONY: destroy
-destroy:
-	docker-compose down -v
+# Build app container.
+.PHONY: build
+build: export
+	docker-compose build app
 
-# Export Poetry requirements.
-.PHONY: requirements
-requirements:
+# Clean app container.
+.PHONY: clean
+clean:
+	docker-compose stop app
+	docker-compose rm -f app
+
+# Export dependencies from Poetry.
+.PHONY: export
+export:
 	poetry export -f requirements.txt > requirements.txt
 
-# Build container from Dockerfile.
-.PHONY: build
-build: requirements
-	docker-compose build
+# Remove all containers and named volumes.
+.PHONY: remove
+remove:
+	docker-compose down -v
 
-# Start the containers.
+# Start all containers.
 .PHONY: start
-start: build
-	docker-compose up -d --force-recreate
+start:
+	docker-compose up -d
