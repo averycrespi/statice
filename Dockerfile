@@ -21,8 +21,8 @@ RUN apt install
 
 # Copy app files.
 COPY app app
-COPY migrations migrations
-COPY config.py statice.py ./
+COPY config.py statice.py entrypoint.sh ./
+RUN chmod u+x entrypoint.sh
 
 # Configure Flask.
 ENV FLASK_APP=statice.py
@@ -30,4 +30,4 @@ ENV FLASK_ENV=development
 ENV FLASK_DEBUG=True
 
 EXPOSE 5000
-CMD ["flask", "run", "--host=0.0.0.0"]
+ENTRYPOINT ["./entrypoint.sh"]
