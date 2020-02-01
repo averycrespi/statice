@@ -26,3 +26,8 @@ remove:
 .PHONY: start
 start:
 	docker-compose up -d
+
+# Watch all container logs.
+.PHONY: watch
+watch:
+	docker-compose logs -f
