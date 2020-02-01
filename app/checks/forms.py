@@ -12,6 +12,8 @@ from app.models import Check
 
 
 class CheckForm(FlaskForm):
+    """Base class for creating or editing a check."""
+
     name = StringField("Name", validators=[DataRequired()])
     url = StringField("URL", validators=[DataRequired(), URL()])
     interval = IntegerField(

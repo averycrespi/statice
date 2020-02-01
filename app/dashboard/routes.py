@@ -7,6 +7,7 @@ from app.models import Check
 @bp.route("/")
 @bp.route("/dashboard")
 def dashboard():
+    """View the dashboard."""
     checks = Check.query.all()
     for check in checks:
         # TODO: refactor magic number

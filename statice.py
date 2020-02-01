@@ -4,6 +4,7 @@ from app.models import User
 
 app = create_app()
 with app.app_context():
+    # TODO: Move to CLI script (create_admin)
     username = app.config["STATICE_USERNAME"]
     if not User.query.filter_by(username=username).first():
         admin = User(username=username)

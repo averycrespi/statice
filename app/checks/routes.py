@@ -8,6 +8,7 @@ from app.checks.forms import CreateCheckForm, DeleteCheckForm, EditCheckForm
 
 @bp.route("/checks", methods=["GET", "POST"])
 def checks():
+    """Manage and create checks."""
     form = CreateCheckForm()
     if form.validate_on_submit():
         check = Check(
@@ -32,6 +33,7 @@ def checks():
 
 @bp.route("/checks/view/<id>")
 def view(id):
+    """View a check by ID."""
     check = Check.query.filter_by(id=id).first()
     if check is None:
         return render_template("404.html")
@@ -40,6 +42,7 @@ def view(id):
 
 @bp.route("/checks/edit/<id>", methods=["GET", "POST"])
 def edit(id):
+    """Edit a check by ID."""
     check = Check.query.filter_by(id=id).first()
     if check is None:
         return render_template("404.html")
@@ -61,6 +64,7 @@ def edit(id):
 
 @bp.route("/checks/delete/<id>", methods=["GET", "POST"])
 def delete(id):
+    """Delete a check by ID."""
     check = Check.query.filter_by(id=id).first()
     if check is None:
         return render_template("404.html")
