@@ -11,9 +11,6 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">URL</th>
-                        <th scope="col">Interval</th>
-                        <th scope="col">Retries</th>
-                        <th scope="col">Timeout</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -24,9 +21,6 @@
                             <a class="text-{{ check.status }}" href="{{ url_for("checks.view", id=check.id) }}">{{ check.name }}</a>
                         </th>
                         <td>{{ check.url }}</td>
-                        <td>{{ check.interval }}s</td>
-                        <td>{{ check.retries }}</td>
-                        <td>{{ check.timeout }}s</td>
                         <td align="right">
                             <a class="btn btn-primary" role="button" href="{{ url_for("checks.edit", id=check.id) }}">Edit</a>
                             <a class="btn btn-danger" role="button" href="{{ url_for("checks.delete", id=check.id) }}">Delete</a>

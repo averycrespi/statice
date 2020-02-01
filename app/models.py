@@ -23,13 +23,9 @@ class User(UserMixin, db.Model):  # type: ignore
 class Check(db.Model):  # type: ignore
     id = db.Column(db.Integer, primary_key=True)
 
+    status = db.Column(db.String())
     name = db.Column(db.String(), unique=True)
     url = db.Column(db.String())
-    status = db.Column(db.String())
-
-    interval = db.Column(db.Integer)
-    retries = db.Column(db.Integer)
-    timeout = db.Column(db.Integer)
 
     events = db.relationship("Event")
     responses = db.relationship("Response")
@@ -39,7 +35,7 @@ class Event(db.Model):  # type: ignore
     id = db.Column(db.Integer, primary_key=True)
     check_id = db.Column(db.Integer, db.ForeignKey("check.id"))
 
-    category = db.Column(db.String())
+    status = db.Column(db.String())
     message = db.Column(db.String())
     time = db.Column(db.DateTime, default=datetime.utcnow, index=True)
 
@@ -57,7 +53,7 @@ class Response(db.Model):  # type: ignore
     status_code = db.Column(db.Integer)
 
 
-class Category:
+class Status:
     INFO = "info"
     WARNING = "warning"
     FAILURE = "danger"

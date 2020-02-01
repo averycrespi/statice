@@ -1,7 +1,7 @@
 from flask import flash, redirect, render_template, url_for
 
 from app import db
-from app.models import Category, Check, Event
+from app.models import Check, Event, Status
 from app.checks import bp
 from app.checks.forms import CreateCheckForm, DeleteCheckForm, EditCheckForm
 
@@ -11,22 +11,15 @@ def checks():
     """Manage and create checks."""
     form = CreateCheckForm()
     if form.validate_on_submit():
-        check = Check(
-            name=form.name.data,
-            url=form.url.data,
-            status=Category.INFO,
-            interval=form.interval.data,
-            retries=form.retries.data,
-            timeout=form.timeout.data,
-        )
+        check = Check(name=form.name.data, url=form.url.data, status=Status.INFO,)
         db.session.add(check)
         db.session.flush()
         event = Event(
-            check_id=check.id, message="Check has been created", category=Category.INFO,
+            check_id=check.id, message="Check has been created", status=Status.INFO,
         )
         db.session.add(event)
         db.session.commit()
-        flash(f"Check {check.name} has been created.", category=Category.INFO)
+        flash(f"Check {check.name} has been created.", category=Status.INFO)
         return redirect(url_for("checks.checks"))
     return render_template("checks.html", checks=Check.query.all(), form=form)
 
@@ -52,12 +45,9 @@ def edit(id):
             return redirect(url_for("checks.checks"))
         check.name = form.name.data
         check.url = form.url.data
-        check.interval = form.interval.data
-        check.retries = form.retries.data
-        check.timeout = form.timeout.data
         db.session.add(check)
         db.session.commit()
-        flash(f"Check {check.name} has been saved.", category=Category.INFO)
+        flash(f"Check {check.name} has been saved.", category=Status.INFO)
         return redirect(url_for("checks.checks"))
     return render_template("edit_check.html", form=form)
 
@@ -75,6 +65,6 @@ def delete(id):
         # TODO: implement cascade deletion
         db.session.delete(check)
         db.session.commit()
-        flash(f"Check {check.name} has been deleted.", category=Category.INFO)
+        flash(f"Check {check.name} has been deleted.", category=Status.INFO)
         return redirect(url_for("checks.checks"))
     return render_template("delete_check.html", check=check, form=form)
