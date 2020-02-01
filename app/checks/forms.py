@@ -1,9 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, StringField, SubmitField
+from wtforms import StringField, SubmitField
 from wtforms.validators import (
     DataRequired,
-    InputRequired,
-    NumberRange,
     ValidationError,
     URL,
 )
@@ -16,25 +14,6 @@ class CheckForm(FlaskForm):
 
     name = StringField("Name", validators=[DataRequired()])
     url = StringField("URL", validators=[DataRequired(), URL()])
-    interval = IntegerField(
-        "Interval",
-        description="Wait this many seconds between requests",
-        default=15,
-        validators=[DataRequired(), NumberRange(min=1)],
-    )
-    retries = IntegerField(
-        "Retries",
-        description="Retry this many times before reporting failure",
-        default=3,
-        # DataRequired won't accept "0", so we use InputRequired.
-        validators=[InputRequired(), NumberRange(min=0)],
-    )
-    timeout = IntegerField(
-        "Timeout",
-        description="Stop waiting for a response after this many seconds",
-        default=5,
-        validators=[DataRequired(), NumberRange(min=1)],
-    )
 
 
 class CreateCheckForm(CheckForm):
