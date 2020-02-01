@@ -17,7 +17,7 @@
 
 - Built with [Bootstrap](https://getbootstrap.com/)
 - Styled with the Flatly theme from [Bootswatch](https://bootswatch.com/)
-- Logo derived from: flowers by ruliani2018 from [the Noun Project](https://thenounproject.com)
+- Logo derived from: flowers by ruliani2018 from the [Noun Project](https://thenounproject.com)
 
 ## License
 
