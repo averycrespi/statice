@@ -4,7 +4,7 @@
     <br>
     Statice
     <br>
-<h1>
+</h1>
 
 <h4 align="center">A friendly status page</h4>
 
