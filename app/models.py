@@ -13,6 +13,9 @@ class User(UserMixin, db.Model):  # type: ignore
     username = db.Column(db.String(), unique=True)
     password_hash = db.Column(db.String(128))
 
+    def __repr__(self):
+        return f"User({self.username}, {self.password_hash})"
+
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
@@ -30,6 +33,9 @@ class Check(db.Model):  # type: ignore
     events = db.relationship("Event")
     responses = db.relationship("Response")
 
+    def __repr__(self):
+        return f"Check({self.status}, {self.name}, {self.url})"
+
 
 class Event(db.Model):  # type: ignore
     id = db.Column(db.Integer, primary_key=True)
@@ -43,6 +49,9 @@ class Event(db.Model):  # type: ignore
         # Sort events by timestamp.
         return self.time < other.time
 
+    def __repr__(self):
+        return f"Event({self.status}, {self.message}, {self.time})"
+
 
 class Response(db.Model):  # type: ignore
     id = db.Column(db.Integer, primary_key=True)
@@ -51,6 +60,9 @@ class Response(db.Model):  # type: ignore
     start_time = db.Column(db.DateTime)
     end_time = db.Column(db.DateTime)
     status_code = db.Column(db.Integer)
+
+    def __repr__(self):
+        return f"Response({self.start_time}, {self.end_time}, {self.status_code})"
 
 
 class Status:

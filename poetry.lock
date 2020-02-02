@@ -38,6 +38,17 @@ version = "7.0"
 
 [[package]]
 category = "main"
+description = "croniter provides iteration for datetime object with cron like format"
+name = "croniter"
+optional = false
+python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "0.3.31"
+
+[package.dependencies]
+python-dateutil = "*"
+
+[[package]]
+category = "main"
 description = "Dominate is a Python library for creating and manipulating HTML documents using an elegant DOM API."
 name = "dominate"
 optional = false
@@ -110,6 +121,26 @@ version = "0.9.0"
 
 [package.dependencies]
 Flask = "*"
+
+[[package]]
+category = "main"
+description = "A Flask extension for RQ."
+name = "flask-rq2"
+optional = false
+python-versions = "*"
+version = "18.3"
+
+[package.dependencies]
+Flask = ">=0.10"
+redis = ">=3.0.0"
+rq = ">=0.13.0"
+rq-scheduler = ">=0.9.0"
+
+[package.extras]
+all = ["Sphinx (>=1.4)", "pytest", "redis (>3.0.0)", "rq-scheduler (>=0.9.0)", "flask-cli (>=0.4.0)", "pytest (>=2.8.0)", "pytest-cache (>=1.0)", "pytest-flake8 (>=0.5)", "pytest-wholenodeid", "pytest-coverage", "pytest-pythonpath", "Flask-CLI (>=0.4.0)"]
+cli = ["Flask-CLI (>=0.4.0)"]
+docs = ["Sphinx (>=1.4)"]
+tests = ["pytest", "redis (>3.0.0)", "rq-scheduler (>=0.9.0)", "flask-cli (>=0.4.0)", "pytest (>=2.8.0)", "pytest-cache (>=1.0)", "pytest-flake8 (>=0.5)", "pytest-wholenodeid", "pytest-coverage", "pytest-pythonpath"]
 
 [[package]]
 category = "main"
@@ -254,6 +285,18 @@ redis = ">=3.0.0"
 
 [[package]]
 category = "main"
+description = "Provides job scheduling capabilities to RQ (Redis Queue)"
+name = "rq-scheduler"
+optional = false
+python-versions = "*"
+version = "0.9.1"
+
+[package.dependencies]
+croniter = ">=0.3.9"
+rq = ">=0.13"
+
+[[package]]
+category = "main"
 description = "Python 2 and 3 compatibility utilities"
 name = "six"
 optional = false
@@ -326,7 +369,7 @@ version = "2.2.1"
 locale = ["Babel (>=1.3)"]
 
 [metadata]
-content-hash = "dc9718a7279b05bc5ec31031b675fe438c23373535e6e68f97ec51fe71ac65be"
+content-hash = "6a3030a0d6956992b2569930672e859d60a10e30299a512ecdcc56bb52f10fa7"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -344,6 +387,10 @@ chardet = [
 click = [
     {file = "Click-7.0-py2.py3-none-any.whl", hash = "sha256:2335065e6395b9e67ca716de5f7526736bfa6ceead690adf616d925bdc622b13"},
     {file = "Click-7.0.tar.gz", hash = "sha256:5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7"},
+]
+croniter = [
+    {file = "croniter-0.3.31-py2.py3-none-any.whl", hash = "sha256:cfd0837246845d3f3eb463ae8790bfb7db6ac76743e8f31aacaf37830de7fb52"},
+    {file = "croniter-0.3.31.tar.gz", hash = "sha256:8984b4b27ddfc4b95b2bcec17ee31f827426cf1d717c2af79eff4b4435e23197"},
 ]
 dominate = [
     {file = "dominate-2.4.0-py2.py3-none-any.whl", hash = "sha256:6e833aea505f0236a9fc692326bac575f8bd38ae0f3a1bdc73d20ca606ac75d5"},
@@ -366,6 +413,10 @@ flask-migrate = [
 flask-moment = [
     {file = "Flask-Moment-0.9.0.tar.gz", hash = "sha256:3e8b88f99af7cf75f2f29ef9d8c158eb92ca6f3c1ba6456ad70f715efa6eb7f7"},
     {file = "Flask_Moment-0.9.0-py2.py3-none-any.whl", hash = "sha256:3c509afa25fd77459c9d799f292dcea384b1cd588ed1fd68f97f6fda6131299e"},
+]
+flask-rq2 = [
+    {file = "Flask-RQ2-18.3.tar.gz", hash = "sha256:3ef6395065255447f8e1516ccca24858ba87da1d71a6975e0e3b55256bf04967"},
+    {file = "Flask_RQ2-18.3-py2.py3-none-any.whl", hash = "sha256:abe1e52d3b98abe37e85830a614ba6af864516f1b6cf2229f352f8500eafc5fd"},
 ]
 flask-sqlalchemy = [
     {file = "Flask-SQLAlchemy-2.4.1.tar.gz", hash = "sha256:6974785d913666587949f7c2946f7001e4fa2cb2d19f4e69ead02e4b8f50b33d"},
@@ -457,6 +508,10 @@ requests = [
 rq = [
     {file = "rq-1.2.2-py2.py3-none-any.whl", hash = "sha256:cc1505c9b122435d40ba36afd5d9b462be2438fa8742c02645359f909068f03c"},
     {file = "rq-1.2.2.tar.gz", hash = "sha256:176a1be023e48cf9f5b3a7eb006f20709fcc564d625fe7c8cc4042f929316636"},
+]
+rq-scheduler = [
+    {file = "rq-scheduler-0.9.1.tar.gz", hash = "sha256:06038a42d33d653f89d534ba3bb95694b9d82b39fdd17c6ac6d9bf77d1acdefb"},
+    {file = "rq_scheduler-0.9.1-py2.py3-none-any.whl", hash = "sha256:9f9f68d0a4749c83f023d903e148b81da2191229e25ac644a9ff9d6eac31bff4"},
 ]
 six = [
     {file = "six-1.14.0-py2.py3-none-any.whl", hash = "sha256:8f3cd2e254d8f793e7f3d6d9df77b92252b52637291d0f0da013c76ea2724b6c"},

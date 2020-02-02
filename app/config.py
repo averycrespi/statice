@@ -4,6 +4,7 @@ import os
 class DevConfig:
     STATICE_USERNAME = os.environ.get("STATICE_USERNAME") or "admin"
     STATICE_PASSWORD = os.environ.get("STATICE_PASSWORD") or "admin"
+    STATICE_INTERVAL = os.environ.get("STATICE_INTERVAL") or 10
 
     SECRET_KEY = os.environ.get("SECRET_KEY") or "change-me"
 
@@ -17,5 +18,5 @@ class DevConfig:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    REDIS_URL = os.environ.get("REDIS_URL") or "redis://statice_redis:6379/0"
-    REDIS_QUEUES = ("default",)
+    RQ_REDIS_URL = os.environ.get("REDIS_URL") or "redis://statice_redis:6379/0"
+    RQ_QUEUES = ("default",)

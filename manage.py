@@ -1,10 +1,8 @@
-import redis
-from rq import Connection, Worker
 import time
 
 from app import create_app, db
 from app.config import DevConfig
-from app.daemon import wake_up
+from app.daemon import Daemon
 from app.models import User
 
 
@@ -26,18 +24,12 @@ def create_user():
         app.logger.info("created user: %s", username)
 
 
-@app.cli.command("run_worker")
-def run_worker():
-    """Run a Redis worker."""
-    conn = redis.from_url(app.config["REDIS_URL"])
-    with Connection(conn):
-        worker = Worker(app.config["REDIS_QUEUES"])
-        worker.work()
-
-
-@app.cli.command("run_daemon")
-def run_daemon():
+@app.cli.command("daemon")
+def daemon():
     """Run the daemon."""
+    # TODO: don't block
+    interval = app.config["STATICE_INTERVAL"]
+    daemon = Daemon()
     while True:
-        wake_up()
-        time.sleep(5)
+        daemon.awaken()
+        time.sleep(interval)

@@ -12,18 +12,26 @@ services:
         ports:
             - "5000:5000"
 
-    worker:
+    daemon:
         image: statice
-        container_name: statice_worker
-        command: flask run_worker
+        container_name: statice_daemon
+        command: flask daemon
         depends_on:
             - db
             - redis
 
-    daemon:
+    worker:
         image: statice
-        container_name: statice_daemon
-        command: flask run_daemon
+        container_name: statice_worker
+        command: flask rq worker
+        depends_on:
+            - db
+            - redis
+
+    scheduler:
+        image: statice
+        container_name: statice_scheduler
+        command: flask rq scheduler
         depends_on:
             - db
             - redis

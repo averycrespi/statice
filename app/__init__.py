@@ -2,6 +2,7 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_migrate import Migrate
 from flask_moment import Moment
+from flask_rq2 import RQ
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -9,6 +10,7 @@ bootstrap = Bootstrap()
 db = SQLAlchemy()
 migrate = Migrate()
 moment = Moment()
+rq = RQ()
 
 
 def create_app(config):
@@ -20,6 +22,7 @@ def create_app(config):
     db.init_app(app)
     migrate.init_app(app, db)
     moment.init_app(app)
+    rq.init_app(app)
 
     from app.dashboard import bp as dashboard_bp
     from app.checks import bp as checks_bp
