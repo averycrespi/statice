@@ -17,6 +17,15 @@ services:
         container_name: statice_worker
         command: flask run_worker
         depends_on:
+            - db
+            - redis
+
+    daemon:
+        image: statice
+        container_name: statice_daemon
+        command: flask run_daemon
+        depends_on:
+            - db
             - redis
 
     db:

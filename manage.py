@@ -1,8 +1,10 @@
 import redis
 from rq import Connection, Worker
+import time
 
 from app import create_app, db
 from app.config import DevConfig
+from app.daemon import wake_up
 from app.models import User
 
 
@@ -31,3 +33,11 @@ def run_worker():
     with Connection(conn):
         worker = Worker(app.config["REDIS_QUEUES"])
         worker.work()
+
+
+@app.cli.command("run_daemon")
+def run_daemon():
+    """Run the daemon."""
+    while True:
+        wake_up()
+        time.sleep(5)
