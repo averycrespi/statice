@@ -1,6 +1,13 @@
 from datetime import datetime
+import http.client
 from flask import current_app
 import requests
+from requests.exceptions import (
+    ConnectionError,
+    RequestException,
+    Timeout,
+    TooManyRedirects,
+)
 
 from app import db, rq
 from app.models import Check, Event, Response, Status
@@ -11,42 +18,68 @@ class Daemon:
         self.jobs = []
 
     def awaken(self):
+        current_app.logger.info("Waking up")
         for job in self.jobs:
             if job.is_finished:
-                current_app.logger.info("Handling result: %s", str(job.result))
                 self.jobs.remove(job)
-
-                response = job.result
-                status = (
-                    Status.SUCCESS
-                    if 200 <= response.status_code < 400
-                    else Status.FAILURE
-                )
-                check = Check.query.filter_by(id=response.check_id).first()
-                check.status = status
-                event = Event(
-                    check_id=check.id,
-                    status=status,
-                    message=f"HTTP response {response.status_code}",
-                )
-
-                db.session.add_all([check, event, response])
-                db.session.commit()
+                self.handle_finished(job)
             elif job.is_failed:
-                # TODO: handle failure
                 self.jobs.remove(job)
-
-        checks = Check.query.all()
-        for check in checks:
+                self.handle_failed(job)
+        for check in Check.query.all():
             self.jobs.append(send_request.queue(check))
+
+    def handle_finished(self, job):
+        current_app.logger.info("Handling finished job: %s", str(job.id))
+        response = job.result
+        check = Check.query.filter_by(id=response.check_id).first()
+        if check:
+            current_app.logger.info("Updating check: %s", str(check))
+            status = Status.SUCCESS if response.ok else Status.FAILURE
+            check.status = status
+            event = Event(
+                check_id=check.id, message=response.description, status=status
+            )
+            db.session.add_all((check, event, response))
+            db.session.commit()
+        else:
+            current_app.logger.warning("Check not found. Skipping ...")
+
+    def handle_failed(self, job):
+        # TODO: implement
+        current_app.logger.warning("Handling failed job: %s", str(job.id))
+        pass
 
 
 @rq.job
 def send_request(check):
-    start = datetime.utcnow()
-    # TODO: handle timeouts
-    resp = requests.get(check.url)
-    end = datetime.utcnow()
-    return Response(
-        check_id=check.id, start_time=start, end_time=end, status_code=resp.status_code
-    )
+    """Send a HTTP GET request."""
+    start_time = datetime.utcnow()
+    try:
+        resp = requests.get(check.url, timeout=5)
+        elapsed_ms = int((datetime.utcnow() - start_time).total_seconds() * 1000)
+        ok = 200 <= resp.status_code < 400
+        description = (
+            f"HTTP {resp.status_code}: {http.client.responses[resp.status_code]}"
+        )
+    except ConnectionError as e:
+        ok = False
+        description = "Error: Connection failed"
+    except Timeout as e:
+        ok = False
+        description = "Error: Request timed out"
+    except TooManyRedirects as e:
+        ok = False
+        description = "Error: Too many redirects"
+    except RequestException as e:
+        ok = False
+        description = f"Error: {str(e)}"
+    finally:
+        elapsed_ms = int((datetime.utcnow() - start_time).total_seconds() * 1000)
+        return Response(
+            check_id=check.id,
+            start_time=start_time,
+            elapsed_ms=elapsed_ms,
+            ok=ok,
+            description=description,
+        )
