@@ -9,7 +9,7 @@ build: export
 # Clean app and worker containers.
 .PHONY: clean
 clean:
-	docker-compose rm -sf app daemon worker scheduler
+	docker-compose rm -sf app daemon worker
 
 # Export dependencies from Poetry.
 .PHONY: export

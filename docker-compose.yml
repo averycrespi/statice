@@ -17,24 +17,14 @@ services:
         container_name: statice_daemon
         command: flask daemon
         depends_on:
-            - db
-            - redis
+            - app
 
     worker:
         image: statice
         container_name: statice_worker
         command: flask rq worker
         depends_on:
-            - db
-            - redis
-
-    scheduler:
-        image: statice
-        container_name: statice_scheduler
-        command: flask rq scheduler
-        depends_on:
-            - db
-            - redis
+            - app
 
     db:
         image: postgres:12
