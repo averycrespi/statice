@@ -24,6 +24,8 @@ class User(UserMixin, db.Model):  # type: ignore
 
 
 class Check(db.Model):  # type: ignore
+    """Represents a check for a single URL."""
+
     id = db.Column(db.Integer, primary_key=True)
 
     name = db.Column(db.String(), unique=True)
@@ -38,6 +40,8 @@ class Check(db.Model):  # type: ignore
 
 
 class Event(db.Model):  # type: ignore
+    """Represents an event related to a check."""
+
     id = db.Column(db.Integer, primary_key=True)
     check_id = db.Column(db.Integer, db.ForeignKey("check.id"))
 
@@ -50,10 +54,21 @@ class Event(db.Model):  # type: ignore
         return self.time < other.time
 
     def __repr__(self):
-        return f"Event({self.time}, {self.message}, {self.status})"
+        return f"Event(time={self.time}, message={self.message}, status={self.status})"
+
+    @staticmethod
+    def from_response(response):
+        return Event(
+            check_id=response.check_id,
+            time=response.start_time,
+            message=response.description,
+            status=Status.SUCCESS if response.ok else Status.FAILURE,
+        )
 
 
 class Response(db.Model):  # type: ignore
+    """Represents a response related to a check."""
+
     id = db.Column(db.Integer, primary_key=True)
     check_id = db.Column(db.Integer, db.ForeignKey("check.id"))
 
@@ -67,6 +82,8 @@ class Response(db.Model):  # type: ignore
 
 
 class Status:
+    """Maps stasuses to Bootstrap alert levels."""
+
     INFO = "info"
     WARNING = "warning"
     FAILURE = "danger"
@@ -74,7 +91,10 @@ class Status:
 
 
 class Card:
+    """Wraps a check into a Bootstrap card."""
+
     def __init__(self, check):
         self.check = check
         self.recent_events = sorted(check.events, reverse=True)[:3]
+        # TODO: add table data
         self.table_data = None

@@ -5,6 +5,7 @@ class DevConfig:
     STATICE_USERNAME = os.environ.get("STATICE_USERNAME") or "admin"
     STATICE_PASSWORD = os.environ.get("STATICE_PASSWORD") or "admin"
     STATICE_INTERVAL = os.environ.get("STATICE_INTERVAL") or 10
+    STATICE_TIMEOUT = os.environ.get("STATICE_TIMEOUT") or 3
 
     SECRET_KEY = os.environ.get("SECRET_KEY") or "change-me"
 
