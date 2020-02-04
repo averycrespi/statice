@@ -1,4 +1,4 @@
-from flask import current_app, flash, redirect, render_template, url_for
+from flask import abort, current_app, flash, redirect, render_template, url_for
 
 from app import db
 from app.models import Check, Event, Status
@@ -30,7 +30,7 @@ def view(id):
     """View a check by ID."""
     check = Check.query.filter_by(id=id).first()
     if check is None:
-        return render_template("404.html")
+        abort(404)
     return render_template("view_check.html", check=check)
 
 
@@ -39,7 +39,7 @@ def edit(id):
     """Edit a check by ID."""
     check = Check.query.filter_by(id=id).first()
     if check is None:
-        return render_template("404.html")
+        abort(404)
     form = EditCheckForm(obj=check)
     if form.validate_on_submit():
         if form.cancel.data:
@@ -59,7 +59,7 @@ def delete(id):
     """Delete a check by ID."""
     check = Check.query.filter_by(id=id).first()
     if check is None:
-        return render_template("404.html")
+        abort(404)
     form = DeleteCheckForm()
     if form.validate_on_submit():
         if form.cancel.data:
