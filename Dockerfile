@@ -21,8 +21,9 @@ RUN apt install
 
 # Copy app files.
 COPY app app
-COPY manage.py start.sh ./
-RUN chmod u+x start.sh
+COPY manage.py ./
+COPY scripts scripts
+RUN chmod u+x scripts/*
 
 # Configure Flask.
 ENV FLASK_APP=manage.py

@@ -5,7 +5,7 @@ services:
         build: .
         image: statice
         container_name: statice_app
-        command: ./start.sh
+        command: ./scripts/start.sh
         depends_on:
             - db
             - redis

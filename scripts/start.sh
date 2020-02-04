@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# TODO: Implement proper schema migration.
+# TODO: implement proper schema migration
 until flask db upgrade
 do
     flask db init

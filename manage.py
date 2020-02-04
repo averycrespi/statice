@@ -31,5 +31,9 @@ def daemon():
     interval = app.config["STATICE_INTERVAL"]
     daemon = Daemon()
     while True:
-        daemon.awaken()
+        try:
+            daemon.awaken()
+        except BaseException as e:
+            app.logger.error("Daemon crashed with error: {}. Restarting ...".format(e))
+            daemon = Daemon()
         time.sleep(interval)
