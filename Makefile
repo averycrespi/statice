@@ -1,5 +1,5 @@
 .PHONY: all
-all: clean build start
+all: build start
 
 # Build containers.
 .PHONY: build
