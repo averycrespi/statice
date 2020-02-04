@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from flask_migrate import Migrate
 from flask_moment import Moment
@@ -11,6 +11,11 @@ db = SQLAlchemy()
 migrate = Migrate()
 moment = Moment()
 rq = RQ()
+
+
+def page_not_found(e):
+    """Handle 404 error."""
+    return render_template("404.html"), 404
 
 
 def create_app(config):
@@ -29,6 +34,7 @@ def create_app(config):
 
     app.register_blueprint(dashboard_bp)
     app.register_blueprint(checks_bp)
+    app.register_error_handler(404, page_not_found)
 
     with app.app_context():
         db.create_all()
