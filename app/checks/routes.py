@@ -25,7 +25,7 @@ def checks():
     return render_template("checks.html", checks=Check.query.all(), form=form)
 
 
-@bp.route("/checks/view/<id>")
+@bp.route("/checks/<id>")
 def view(id):
     """View a check by ID."""
     check = Check.query.filter_by(id=id).first()
