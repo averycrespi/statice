@@ -29,11 +29,12 @@ def create_app(config):
     moment.init_app(app)
     rq.init_app(app)
 
-    from app.dashboard import bp as dashboard_bp
     from app.checks import bp as checks_bp
+    from app.dashboard import bp as dashboard_bp
 
-    app.register_blueprint(dashboard_bp)
     app.register_blueprint(checks_bp)
+    app.register_blueprint(dashboard_bp)
+
     app.register_error_handler(404, page_not_found)
 
     with app.app_context():
