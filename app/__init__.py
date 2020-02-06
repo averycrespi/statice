@@ -5,17 +5,14 @@ from flask_moment import Moment
 from flask_rq2 import RQ
 from flask_sqlalchemy import SQLAlchemy
 
+from app.handlers import page_not_found
+
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 migrate = Migrate()
 moment = Moment()
 rq = RQ()
-
-
-def page_not_found(e):
-    """Handle 404 error."""
-    return render_template("404.html"), 404
 
 
 def create_app(config):
