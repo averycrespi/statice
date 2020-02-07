@@ -10,6 +10,7 @@
 
 <p align="center">
     <a href="#features">Features</a> •
+    <a href="#getting-started">Getting Started</a> •
     <a href="#credits">Credits</a> •
     <a href="#license">License</a>
 </p>
@@ -23,6 +24,22 @@
 - Create checks to watch your pages
 - Monitor HTTP status codes and response times
 - **WIP**: Receive alerts when your checks fail
+
+## Getting Started
+
+Requirements:
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- [Python](https://www.python.org/) (3.6 or newer)
+- [Poetry](https://python-poetry.org/)
+
+```sh
+# Clone the repository
+git clone git@github.com:averycrespi/statice.git
+
+# Build and start containers
+make
+```
 
 ## Credits
 
