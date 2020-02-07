@@ -6,16 +6,25 @@
     <br>
 </h1>
 
-<h4 align="center">A friendly status page</h4>
+<h4 align="center">A friendly status page.</h4>
 
 <p align="center">
+    <a href="#features">Features</a> •
     <a href="#credits">Credits</a> •
     <a href="#license">License</a>
 </p>
 
+<img src="https://raw.githubusercontent.com/averycrespi/statice/29-readme/resources/logo.png" width="600"/img>
+
+## Features
+
+- Create checks to watch your pages
+- Monitor HTTP status codes and response times
+- **WIP**: Receive alerts when your checks fail
+
 ## Credits
 
-- Built with [Bootstrap](https://getbootstrap.com/)
+- Built with [Flask](https://www.palletsprojects.com/p/flask/) and [Bootstrap](https://getbootstrap.com/)
 - Styled with the Flatly theme from [Bootswatch](https://bootswatch.com/)
 - Logo derived from: flowers by ruliani2018 from the [Noun Project](https://thenounproject.com)
 
