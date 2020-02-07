@@ -14,7 +14,7 @@
     <a href="#license">License</a>
 </p>
 
-<img src="https://raw.githubusercontent.com/averycrespi/statice/29-readme/resources/logo.png" width="600"/>
+<img src="https://raw.githubusercontent.com/averycrespi/statice/29-readme/resources/screenshot.png" width="600"/>
 
 ## Features
 
