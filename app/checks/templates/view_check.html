@@ -1,21 +1,31 @@
 {% extends "base.html" %}
 
+{% block scripts %}
+{{ super() }}
+{% include "_chart.j2" %}
+{% endblock %}
+
 {% block app_content %}
 <div class="container">
     <div class="row">
         <div class="col">
             <h1 class="text-{{ check.status }}">{{ check.name }}</h1>
-            <div class="alert alert-primary" role="alert">TODO: add chart</div>
         </div>
     </div>
     <div class="row">
         <div class="col">
+            <canvas id="chart" height="400" style='width: 100%;'></canvas>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h3>Events</h3>
             <table class="table">
                 <tbody>
                     {% for event in check.events|sort(attribute="time", reverse=True) %}
                     <tr>
                         <td>
-                            <span>{{ event.message }}</span>
+                            <span class="text-{{ event.status }}">{{ event.message }}</span>
                             <span class="text-muted">{{ moment(event.time).fromNow() }}</span>
                         </td>
                     </tr>
