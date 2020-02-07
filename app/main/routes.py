@@ -1,6 +1,6 @@
 from flask import render_template
 
-from app.dashboard import bp
+from app.main import bp
 from app.models import Card, Check
 
 

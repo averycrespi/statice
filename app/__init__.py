@@ -27,10 +27,10 @@ def create_app(config):
     rq.init_app(app)
 
     from app.checks import bp as checks_bp
-    from app.dashboard import bp as dashboard_bp
+    from app.main import bp as main_bp
 
     app.register_blueprint(checks_bp)
-    app.register_blueprint(dashboard_bp)
+    app.register_blueprint(main_bp)
 
     app.register_error_handler(404, page_not_found)
 
