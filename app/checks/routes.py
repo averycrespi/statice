@@ -1,3 +1,4 @@
+import arrow
 from flask import abort, current_app, flash, redirect, render_template, url_for
 
 from app import db
@@ -31,7 +32,13 @@ def view(id):
     check = Check.query.filter_by(id=id).first()
     if check is None:
         abort(404)
-    return render_template("view_check.html", check=check)
+    return render_template(
+        "view_check.html",
+        check=check,
+        legend="Response Time (ms)",
+        labels=[arrow.get(r.start_time).humanize() for r in check.responses[-10:]],
+        values=[r.elapsed_ms for r in check.responses[-10:]],
+    )
 
 
 @bp.route("/checks/edit/<id>", methods=["GET", "POST"])

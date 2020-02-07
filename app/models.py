@@ -96,5 +96,3 @@ class Card:
     def __init__(self, check):
         self.check = check
         self.recent_events = sorted(check.events, reverse=True)[:3]
-        # TODO: add table data
-        self.table_data = None
