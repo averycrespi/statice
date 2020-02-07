@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/averycrespi/statice/29-readme/resources/screenshot.png" width="600"/>
+    <img src="https://raw.githubusercontent.com/averycrespi/statice/master/resources/screenshot.png" width="600"/>
 </p>
 
 ## Features
