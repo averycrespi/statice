@@ -38,8 +38,8 @@ def view(id):
         "view_check.j2",
         check=check,
         legend="Response Time (ms)",
-        labels=[arrow.get(r.start_time).humanize() for r in check.responses[-10:]],
-        values=[r.elapsed_ms for r in check.responses[-10:]],
+        labels=[arrow.get(r.start_time).humanize() for r in sorted(check.responses)],
+        values=[r.elapsed_ms for r in sorted(check.responses)],
     )
 
 

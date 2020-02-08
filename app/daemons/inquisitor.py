@@ -1,17 +1,29 @@
 from flask import current_app
 
+import time
+
 from app import db
 from app.jobs import send_request
 from app.models import Check, Event
 
 
-class Daemon:
-    """Performs background tasks for the application."""
+class Inquisitor:
+    """Send requests and handle responses."""
 
-    def __init__(self):
+    def __init__(self, *, interval, timeout):
+        self.interval = interval
+        self.timeout = timeout
         self.jobs = []
 
-    def awaken(self):
+    def run(self):
+        current_app.logger.info(
+            f"Running inquisitor with interval: {self.interval} and timeout: {self.timeout}"
+        )
+        while True:
+            self.wake_up()
+            time.sleep(self.interval)
+
+    def wake_up(self):
         current_app.logger.info("Waking up ...")
 
         current_app.logger.info("Processing jobs ...")
@@ -28,13 +40,11 @@ class Daemon:
                     db.session.commit()
 
             elif job.is_failed:
-                # TODO: handle failed jobs
                 self.jobs.remove(job)
+                current_app.logger.error(f"Job failed: {str(job)}")
 
         current_app.logger.info("Enqueuing requests ...")
         for check in Check.query.all():
-            self.jobs.append(
-                send_request.queue(check, current_app.config["STATICE_TIMEOUT"])
-            )
+            self.jobs.append(send_request.queue(check, self.timeout))
 
         current_app.logger.info("Going back to sleep ...")

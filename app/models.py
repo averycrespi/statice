@@ -72,10 +72,14 @@ class Response(db.Model):  # type: ignore
     id = db.Column(db.Integer, primary_key=True)
     check_id = db.Column(db.Integer, db.ForeignKey("check.id"))
 
-    start_time = db.Column(db.DateTime)
+    start_time = db.Column(db.DateTime, default=datetime.utcnow, index=True)
     elapsed_ms = db.Column(db.Integer)
     ok = db.Column(db.Boolean)
     description = db.Column(db.String())
+
+    def __lt__(self, other):
+        # Sort responses by start time.
+        return self.start_time < other.start_time
 
     def __repr__(self):
         return f"Response({self.start_time}, {self.elapsed_ms}, {self.ok}, {self.description})"

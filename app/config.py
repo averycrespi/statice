@@ -7,8 +7,11 @@ class BaseConfig:
     STATICE_USERNAME = os.environ.get("STATICE_USERNAME") or "admin"
     STATICE_PASSWORD = os.environ.get("STATICE_PASSWORD") or "admin"
 
-    STATICE_INTERVAL = os.environ.get("STATICE_INTERVAL") or 10
-    STATICE_TIMEOUT = os.environ.get("STATICE_TIMEOUT") or 3
+    STATICE_REQUEST_INTERVAL = os.environ.get("STATICE_REQUEST_INTERVAL") or 10
+    STATICE_REQUEST_TIMEOUT = os.environ.get("STATICE_REQUEST_TIMEOUT") or 3
+
+    STATICE_PURGE_INTERVAL = os.environ.get("STATICE_PURGE_INTERVAL") or 10
+    STATICE_PURGE_AGE = os.environ.get("STATICE_PURGE_AGE") or 600
 
 
 class DevConfig(BaseConfig):
