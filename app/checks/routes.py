@@ -34,12 +34,13 @@ def view(id):
     check = Check.query.filter_by(id=id).first()
     if check is None:
         abort(404)
+    responses = sorted(check.responses)[:25]
     return render_template(
         "view_check.j2",
         check=check,
         legend="Response Time (ms)",
-        labels=[arrow.get(r.start_time).humanize() for r in sorted(check.responses)],
-        values=[r.elapsed_ms for r in sorted(check.responses)],
+        labels=[arrow.get(r.start_time).humanize() for r in responses],
+        values=[r.elapsed_ms for r in responses],
     )
 
 
