@@ -1,14 +1,13 @@
 version: '3'
 
 services:
-    app:
+    web:
         build: .
         image: statice
-        container_name: statice_app
+        container_name: statice_web
         command: ./entrypoint.sh
         depends_on:
             - db
-            - redis
         ports:
             - "5000:5000"
         volumes:
@@ -19,7 +18,8 @@ services:
         container_name: statice_daemon
         command: flask daemon
         depends_on:
-            - app
+            - db
+            - redis
         volumes:
             - ./app:/statice/app:ro
 
@@ -28,7 +28,7 @@ services:
         container_name: statice_worker
         command: flask rq worker
         depends_on:
-            - app
+            - redis
         volumes:
             - ./app:/statice/app:ro
 

@@ -6,11 +6,6 @@ all: build start
 build: export
 	docker-compose build
 
-# Clean app and worker containers.
-.PHONY: clean
-clean:
-	docker-compose rm -sf app daemon worker
-
 # Export dependencies from Poetry.
 .PHONY: export
 export:
@@ -27,6 +22,6 @@ start:
 	docker-compose up -d
 
 # Watch all container logs.
-.PHONY: watch
-watch:
+.PHONY: logs
+logs:
 	docker-compose logs -f
