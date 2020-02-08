@@ -34,7 +34,7 @@ def view(id):
     check = Check.query.filter_by(id=id).first()
     if check is None:
         abort(404)
-    responses = sorted(check.responses)[:25]
+    responses = sorted(check.responses)[-25:]
     return render_template(
         "view_check.j2",
         check=check,
