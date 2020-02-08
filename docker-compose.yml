@@ -13,13 +13,22 @@ services:
         volumes:
             - ./app:/statice/app:ro
 
-    daemon:
+    inquisitor:
         image: statice
-        container_name: statice_daemon
-        command: flask daemon
+        container_name: statice_inquisitor
+        command: flask inquisitor
         depends_on:
             - db
             - redis
+        volumes:
+            - ./app:/statice/app:ro
+
+    janitor:
+        image: statice
+        container_name: statice_janitor
+        command: flask janitor
+        depends_on:
+            - db
         volumes:
             - ./app:/statice/app:ro
 

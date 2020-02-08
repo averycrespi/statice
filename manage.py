@@ -1,8 +1,7 @@
-import time
-
 from app import create_app, db
 from app.config import DevConfig
-from app.daemon import Daemon
+from app.daemons.inquisitor import Inquisitor
+from app.daemons.janitor import Janitor
 from app.models import User
 
 
@@ -15,25 +14,30 @@ def create_user():
     username = app.config["STATICE_USERNAME"]
     password = app.config["STATICE_PASSWORD"]
     if User.query.filter_by(username=username).first():
-        app.logger.info("found existing user: %s", username)
+        app.logger.info("Found existing user: %s", username)
     else:
         user = User(username=username)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
-        app.logger.info("created user: %s", username)
+        app.logger.info("Created user: %s", username)
 
 
-@app.cli.command("daemon")
-def daemon():
-    """Run the daemon."""
-    # TODO: don't block
-    interval = app.config["STATICE_INTERVAL"]
-    daemon = Daemon()
-    while True:
-        try:
-            daemon.awaken()
-        except BaseException as e:
-            app.logger.error("Daemon crashed with error: {}. Restarting ...".format(e))
-            daemon = Daemon()
-        time.sleep(interval)
+@app.cli.command("inquisitor")
+def inquisitor():
+    """Run the inquisitor."""
+    inquisitor = Inquisitor(
+        interval=app.config["STATICE_REQUEST_INTERVAL"],
+        timeout=app.config["STATICE_REQUEST_TIMEOUT"],
+    )
+    inquisitor.run()
+
+
+@app.cli.command("janitor")
+def janitor():
+    """Run the janitor."""
+    janitor = Janitor(
+        interval=app.config["STATICE_PURGE_INTERVAL"],
+        age=app.config["STATICE_PURGE_AGE"],
+    )
+    janitor.run()
