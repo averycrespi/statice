@@ -9,4 +9,4 @@ from app.models import Card, Check
 def dashboard():
     """View the dashboard."""
     cards = [Card(check) for check in Check.query.all()]
-    return render_template("dashboard.html", cards=cards)
+    return render_template("dashboard.j2", cards=cards)

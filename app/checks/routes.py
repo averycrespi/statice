@@ -23,7 +23,7 @@ def checks():
         flash(f"Check {check.name} has been created.", category=Status.INFO)
         current_app.logger.info("created check: %s", check.name)
         return redirect(url_for("checks.checks"))
-    return render_template("checks.html", checks=Check.query.all(), form=form)
+    return render_template("checks.j2", checks=Check.query.all(), form=form)
 
 
 @bp.route("/checks/<id>")
@@ -33,7 +33,7 @@ def view(id):
     if check is None:
         abort(404)
     return render_template(
-        "view_check.html",
+        "view_check.j2",
         check=check,
         legend="Response Time (ms)",
         labels=[arrow.get(r.start_time).humanize() for r in check.responses[-10:]],
@@ -58,7 +58,7 @@ def edit(id):
         flash(f"Check {check.name} has been saved.", category=Status.INFO)
         current_app.logger.info("saved check: %s", check.name)
         return redirect(url_for("checks.checks"))
-    return render_template("edit_check.html", form=form)
+    return render_template("edit_check.j2", form=form)
 
 
 @bp.route("/checks/delete/<id>", methods=["GET", "POST"])
@@ -77,4 +77,4 @@ def delete(id):
         flash(f"Check {check.name} has been deleted.", category=Status.WARNING)
         current_app.logger.warning("deleted check: %s", check.name)
         return redirect(url_for("checks.checks"))
-    return render_template("delete_check.html", check=check, form=form)
+    return render_template("delete_check.j2", check=check, form=form)
