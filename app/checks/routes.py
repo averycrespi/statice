@@ -16,14 +16,16 @@ def checks():
         db.session.add(check)
         db.session.flush()
         event = Event(
-            check_id=check.id, message="Check has been created", status=Status.INFO,
+            check_id=check.id,
+            message=f"Check {check.name} has been created",
+            status=Status.INFO,
         )
         db.session.add(event)
         db.session.commit()
         flash(f"Check {check.name} has been created.", category=Status.INFO)
         current_app.logger.info("created check: %s", check.name)
         return redirect(url_for("checks.checks"))
-    return render_template("checks.j2", checks=Check.query.all(), form=form)
+    return render_template("manage_checks.j2", checks=Check.query.all(), form=form)
 
 
 @bp.route("/checks/<id>")

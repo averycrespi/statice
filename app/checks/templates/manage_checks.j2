@@ -5,7 +5,7 @@
 {% block app_content %}
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col-8">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -15,6 +15,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% if not checks %}
+                    <tr class="table">
+                        <td class="text-muted">No checks found.</td>
+                        <td class="text-muted"></td>
+                        <td class="text-muted"></td>
+                    </tr>
+                    {% endif %}
                     {% for check in checks %}
                     <tr class="table">
                         <th scope="row">
@@ -32,9 +39,8 @@
                 </tbody>
             </table>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
+        <div class="col-4">
+            <h3 class="text-muted">Create a new check</h3>
             {{ wtf.quick_form(form, button_map={"submit": "success"}, form_type="horizontal") }}
         </div>
     </div>

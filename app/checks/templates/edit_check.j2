@@ -3,5 +3,12 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block app_content %}
-    {{ wtf.quick_form(form, button_map={"submit": "success", "cancel": "secondary"}, form_type="horizontal") }}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <h1 class="text-muted">Edit an existing check</h1>
+            {{ wtf.quick_form(form, button_map={"submit": "success", "cancel": "secondary"}) }}
+        </div>
+    </div>
+</div>
 {% endblock %}

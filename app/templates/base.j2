@@ -15,12 +15,11 @@
 
 {% block navbar %}
 <nav class="navbar navbar-expand navbar-dark bg-primary rounded-0">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="{{ url_for("main.dashboard") }}">
         <h1>Statice</h1>
     </a>
     <div class="collapse navbar-collapse">
         <div class="navbar-nav">
-            <a class="nav-item nav-link" href="{{ url_for("main.dashboard") }}">Dashboard</a>
             <a class="nav-item nav-link" href="{{ url_for("checks.checks") }}">Checks</a>
         </div>
     </div>

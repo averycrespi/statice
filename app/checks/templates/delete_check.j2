@@ -3,7 +3,10 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block app_content %}
-    <h1>Are you sure that you want to delete {{ check.name }}?</h1>
-    <h3>This action cannot be undone.</h3>
+<div align="center">
+    <h1 class="text-muted">Are you sure that you want to delete {{ check.name }}?</h1>
+    <h3 class="text-danger">This action cannot be undone.</h3>
+    <br>
     {{ wtf.quick_form(form, button_map={"submit": "danger", "cancel": "secondary"}) }}
+</div>
 {% endblock %}

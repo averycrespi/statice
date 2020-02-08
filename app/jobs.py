@@ -23,11 +23,11 @@ def send_request(check, timeout):
         description = "HTTP {code}: {msg}".format(
             code=resp.status_code, msg=http.client.responses[resp.status_code]
         )
-    except ConnectionError as e:
+    except ConnectionError:
         description = "Error: connection failed"
-    except Timeout as e:
+    except Timeout:
         description = "Error: request timed out"
-    except TooManyRedirects as e:
+    except TooManyRedirects:
         description = "Error: too many redirects"
     except RequestException as e:
         description = "Unknown error: {}".format(str(e))
