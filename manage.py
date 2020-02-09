@@ -11,16 +11,18 @@ app = create_app(DevConfig)
 @app.cli.command("create_user")
 def create_user():
     """Create the default user."""
-    username = app.config["STATICE_USERNAME"]
-    password = app.config["STATICE_PASSWORD"]
-    if User.query.filter_by(username=username).first():
-        app.logger.info("Found existing user: %s", username)
+    username = app.config["STATICE_ADMIN_USERNAME"]
+    password = app.config["STATICE_ADMIN_PASSWORD"]
+    user = User.query.filter_by(username=username).first()
+    if user:
+        user.set_password(password)
+        app.logger.info("Updated existing user: %s", username)
     else:
         user = User(username=username)
         user.set_password(password)
-        db.session.add(user)
-        db.session.commit()
-        app.logger.info("Created user: %s", username)
+        app.logger.info("Created admin user: %s", username)
+    db.session.add(user)
+    db.session.commit()
 
 
 @app.cli.command("inquisitor")

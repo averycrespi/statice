@@ -1,5 +1,6 @@
 import arrow
 from flask import abort, current_app, flash, redirect, render_template, url_for
+from flask_login import login_required
 
 from app import db
 from app.models import Check, Event, Status
@@ -8,6 +9,7 @@ from app.checks.forms import CreateCheckForm, DeleteCheckForm, EditCheckForm
 
 
 @bp.route("/checks", methods=["GET", "POST"])
+@login_required
 def checks():
     """Manage and create checks."""
     form = CreateCheckForm()
@@ -45,6 +47,7 @@ def view(id):
 
 
 @bp.route("/checks/edit/<id>", methods=["GET", "POST"])
+@login_required
 def edit(id):
     """Edit a check by ID."""
     check = Check.query.filter_by(id=id).first()
@@ -65,6 +68,7 @@ def edit(id):
 
 
 @bp.route("/checks/delete/<id>", methods=["GET", "POST"])
+@login_required
 def delete(id):
     """Delete a check by ID."""
     check = Check.query.filter_by(id=id).first()
