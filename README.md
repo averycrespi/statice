@@ -23,7 +23,7 @@
 
 - Create checks to watch your pages
 - Monitor HTTP status codes and response times
-- **WIP**: Receive alerts when your checks fail
+- Easily tweak performance with environment variables
 
 ## Getting Started
 
