@@ -4,8 +4,8 @@ import os
 class BaseConfig:
     """Base configuration. Does not include all necessary variables."""
 
-    STATICE_USERNAME = os.environ.get("STATICE_USERNAME") or "admin"
-    STATICE_PASSWORD = os.environ.get("STATICE_PASSWORD") or "admin"
+    STATICE_ADMIN_USERNAME = "admin"
+    STATICE_ADMIN_PASSWORD = os.environ.get("STATICE_PASSWORD") or "admin"
 
     STATICE_REQUEST_INTERVAL = os.environ.get("STATICE_REQUEST_INTERVAL") or 10
     STATICE_REQUEST_TIMEOUT = os.environ.get("STATICE_REQUEST_TIMEOUT") or 3
