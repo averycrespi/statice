@@ -1,6 +1,6 @@
 {% extends "base.j2" %}
 
-{% import "bootstrap/wtf.html" as wtf %}
+{% from "bootstrap/form.html" import render_form %}
 
 {% block app_content %}
 <div class="container">
@@ -41,7 +41,7 @@
         </div>
         <div class="col-4">
             <h3 class="text-muted">Create a new check</h3>
-            {{ wtf.quick_form(form, button_map={"submit": "success"}, form_type="horizontal") }}
+            {{ render_form(form, button_map={"submit": "success"}, form_type="horizontal") }}
         </div>
     </div>
 </div>

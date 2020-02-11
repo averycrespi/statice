@@ -82,6 +82,21 @@ d = ["aiohttp (>=3.3.2)", "aiohttp-cors"]
 
 [[package]]
 category = "main"
+description = "Bootstrap helper for Flask/Jinja2."
+name = "bootstrap-flask"
+optional = false
+python-versions = "*"
+version = "1.2.0"
+
+[package.dependencies]
+Flask = "*"
+
+[package.extras]
+dev = ["coverage", "tox", "sphinx", "pallets-sphinx-themes", "sphinxcontrib-log-cabinet"]
+docs = ["sphinx", "pallets-sphinx-themes", "sphinxcontrib-log-cabinet"]
+
+[[package]]
+category = "main"
 description = "Python package for providing Mozilla's CA Bundle."
 name = "certifi"
 optional = false
@@ -125,14 +140,6 @@ version = "0.3.31"
 python-dateutil = "*"
 
 [[package]]
-category = "main"
-description = "Dominate is a Python library for creating and manipulating HTML documents using an elegant DOM API."
-name = "dominate"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "2.4.0"
-
-[[package]]
 category = "dev"
 description = "Discover and load entry points from installed packages."
 name = "entrypoints"
@@ -172,19 +179,6 @@ itsdangerous = ">=0.24"
 dev = ["pytest", "coverage", "tox", "sphinx", "pallets-sphinx-themes", "sphinxcontrib-log-cabinet", "sphinx-issues"]
 docs = ["sphinx", "pallets-sphinx-themes", "sphinxcontrib-log-cabinet", "sphinx-issues"]
 dotenv = ["python-dotenv"]
-
-[[package]]
-category = "main"
-description = "An extension that includes Bootstrap in your project, without any boilerplate code."
-name = "flask-bootstrap"
-optional = false
-python-versions = "*"
-version = "3.3.7.1"
-
-[package.dependencies]
-Flask = ">=0.8"
-dominate = "*"
-visitor = "*"
 
 [[package]]
 category = "main"
@@ -583,14 +577,6 @@ socks = ["PySocks (>=1.5.6,<1.5.7 || >1.5.7,<2.0)"]
 
 [[package]]
 category = "main"
-description = "A tiny pythonic visitor implementation."
-name = "visitor"
-optional = false
-python-versions = "*"
-version = "0.1.3"
-
-[[package]]
-category = "main"
 description = "The comprehensive WSGI web application library."
 name = "werkzeug"
 optional = false
@@ -614,7 +600,7 @@ version = "2.2.1"
 locale = ["Babel (>=1.3)"]
 
 [metadata]
-content-hash = "10e5b2e774c1d1f86c6e34dec9c862674e70b23ad03d530554af72202785fb53"
+content-hash = "097c5dd00bad53d7fe12e91887d0aedca475759062a92b52a7bd726656fa8cf5"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -641,6 +627,10 @@ black = [
     {file = "black-19.10b0-py36-none-any.whl", hash = "sha256:1b30e59be925fafc1ee4565e5e08abef6b03fe455102883820fe5ee2e4734e0b"},
     {file = "black-19.10b0.tar.gz", hash = "sha256:c2edb73a08e9e0e6f65a0e6af18b059b8b1cdd5bef997d7a0b181df93dc81539"},
 ]
+bootstrap-flask = [
+    {file = "Bootstrap-Flask-1.2.0.tar.gz", hash = "sha256:d03c738f5377dbe7ecce010e28afcc0fb8373c4c9d01f8590af7657b53342c1d"},
+    {file = "Bootstrap_Flask-1.2.0-py2.py3-none-any.whl", hash = "sha256:ed817e82acadac4c8b3fc2d1a310325b6ed395d13b0f6ca9d14e1742f880e685"},
+]
 certifi = [
     {file = "certifi-2019.11.28-py2.py3-none-any.whl", hash = "sha256:017c25db2a153ce562900032d5bc68e9f191e44e9a0f762f373977de9df1fbb3"},
     {file = "certifi-2019.11.28.tar.gz", hash = "sha256:25b64c7da4cd7479594d035c08c2d809eb4aab3a26e5a990ea98cc450c320f1f"},
@@ -661,10 +651,6 @@ croniter = [
     {file = "croniter-0.3.31-py2.py3-none-any.whl", hash = "sha256:cfd0837246845d3f3eb463ae8790bfb7db6ac76743e8f31aacaf37830de7fb52"},
     {file = "croniter-0.3.31.tar.gz", hash = "sha256:8984b4b27ddfc4b95b2bcec17ee31f827426cf1d717c2af79eff4b4435e23197"},
 ]
-dominate = [
-    {file = "dominate-2.4.0-py2.py3-none-any.whl", hash = "sha256:6e833aea505f0236a9fc692326bac575f8bd38ae0f3a1bdc73d20ca606ac75d5"},
-    {file = "dominate-2.4.0.tar.gz", hash = "sha256:a92474b4312bd8b4c1789792f3ec8c571cd8afa8e7502a2b1c64dd48cd67e59c"},
-]
 entrypoints = [
     {file = "entrypoints-0.3-py2.py3-none-any.whl", hash = "sha256:589f874b313739ad35be6e0cd7efde2a4e9b6fea91edcc34e58ecbb8dbe56d19"},
     {file = "entrypoints-0.3.tar.gz", hash = "sha256:c70dd71abe5a8c85e55e12c19bd91ccfeec11a6e99044204511f9ed547d48451"},
@@ -676,9 +662,6 @@ flake8 = [
 flask = [
     {file = "Flask-1.1.1-py2.py3-none-any.whl", hash = "sha256:45eb5a6fd193d6cf7e0cf5d8a5b31f83d5faae0293695626f539a823e93b13f6"},
     {file = "Flask-1.1.1.tar.gz", hash = "sha256:13f9f196f330c7c2c5d7a5cf91af894110ca0215ac051b5844701f2bfd934d52"},
-]
-flask-bootstrap = [
-    {file = "Flask-Bootstrap-3.3.7.1.tar.gz", hash = "sha256:cb08ed940183f6343a64e465e83b3a3f13c53e1baabb8d72b5da4545ef123ac8"},
 ]
 flask-login = [
     {file = "Flask-Login-0.4.1.tar.gz", hash = "sha256:c815c1ac7b3e35e2081685e389a665f2c74d7e077cb93cecabaea352da4752ec"},
@@ -930,9 +913,6 @@ typing-extensions = [
 urllib3 = [
     {file = "urllib3-1.25.7-py2.py3-none-any.whl", hash = "sha256:a8a318824cc77d1fd4b2bec2ded92646630d7fe8619497b142c84a9e6f5a7293"},
     {file = "urllib3-1.25.7.tar.gz", hash = "sha256:f3c5fd51747d450d4dcf6f923c81f78f811aab8205fda64b0aba34a4e48b0745"},
-]
-visitor = [
-    {file = "visitor-0.1.3.tar.gz", hash = "sha256:2c737903b2b6864ebc6167eef7cf3b997126f1aa94bdf590f90f1436d23e480a"},
 ]
 werkzeug = [
     {file = "Werkzeug-0.16.0-py2.py3-none-any.whl", hash = "sha256:e5f4a1f98b52b18a93da705a7458e55afb26f32bff83ff5d19189f92462d65c4"},
