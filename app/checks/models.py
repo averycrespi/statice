@@ -1,30 +1,10 @@
 from datetime import datetime
-from flask_login import UserMixin
-from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import db
 
 
-class User(UserMixin, db.Model):  # type: ignore
-    """Represents a application administrator."""
-
-    id = db.Column(db.Integer, primary_key=True)
-
-    username = db.Column(db.String(), unique=True)
-    password_hash = db.Column(db.String(128))
-
-    def __repr__(self):
-        return f"User({self.username}, {self.password_hash})"
-
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
-
-
 class Check(db.Model):  # type: ignore
-    """Represents a check for a single URL."""
+    """Represents a check."""
 
     id = db.Column(db.Integer, primary_key=True)
 
@@ -40,7 +20,7 @@ class Check(db.Model):  # type: ignore
 
 
 class Event(db.Model):  # type: ignore
-    """Represents an event related to a check."""
+    """Represents an event."""
 
     id = db.Column(db.Integer, primary_key=True)
     check_id = db.Column(db.Integer, db.ForeignKey("check.id"))
@@ -67,7 +47,7 @@ class Event(db.Model):  # type: ignore
 
 
 class Response(db.Model):  # type: ignore
-    """Represents a response related to a check."""
+    """Represents a response."""
 
     id = db.Column(db.Integer, primary_key=True)
     check_id = db.Column(db.Integer, db.ForeignKey("check.id"))

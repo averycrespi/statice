@@ -1,7 +1,7 @@
 from flask import render_template
 
-from app.main import bp
-from app.models import Card, Check
+from app.checks import Card, Check
+from app.dashboard import bp
 
 
 @bp.route("/")

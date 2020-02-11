@@ -3,7 +3,7 @@ from flask import current_app
 import time
 
 from app import db
-from app.models import Event, Response
+from app.checks import Event, Response
 
 
 class Janitor:

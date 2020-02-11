@@ -1,28 +1,9 @@
-from app import create_app, db
-from app.config import DevConfig
-from app.daemons.inquisitor import Inquisitor
-from app.daemons.janitor import Janitor
-from app.models import User
+from app import create_app
+from app.config import Config
+from app.tasks import Inquisitor, Janitor
 
 
-app = create_app(DevConfig)
-
-
-@app.cli.command("create_user")
-def create_user():
-    """Create the default user."""
-    username = app.config["STATICE_ADMIN_USERNAME"]
-    password = app.config["STATICE_ADMIN_PASSWORD"]
-    user = User.query.filter_by(username=username).first()
-    if user:
-        user.set_password(password)
-        app.logger.info("Updated existing user: %s", username)
-    else:
-        user = User(username=username)
-        user.set_password(password)
-        app.logger.info("Created admin user: %s", username)
-    db.session.add(user)
-    db.session.commit()
+app = create_app(Config)
 
 
 @app.cli.command("inquisitor")

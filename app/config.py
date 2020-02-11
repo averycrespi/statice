@@ -1,21 +1,14 @@
 import os
 
 
-class BaseConfig:
-    """Base configuration. Does not include all necessary variables."""
-
-    STATICE_ADMIN_USERNAME = "admin"
-    STATICE_ADMIN_PASSWORD = os.environ.get("STATICE_PASSWORD") or "admin"
+class Config:
+    """Configures the application."""
 
     STATICE_REQUEST_INTERVAL = os.environ.get("STATICE_REQUEST_INTERVAL") or 10
     STATICE_REQUEST_TIMEOUT = os.environ.get("STATICE_REQUEST_TIMEOUT") or 3
 
     STATICE_PURGE_INTERVAL = os.environ.get("STATICE_PURGE_INTERVAL") or 10
     STATICE_PURGE_AGE = os.environ.get("STATICE_PURGE_AGE") or 600
-
-
-class DevConfig(BaseConfig):
-    """Development configuration."""
 
     SECRET_KEY = os.environ.get("SECRET_KEY") or "change-me"
 
