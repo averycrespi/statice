@@ -5,30 +5,25 @@ services:
         build: .
         image: statice
         container_name: statice_web
-        command: ./entrypoint.sh
+        command: ./docker-entrypoint.sh
         depends_on:
             - db
+        env_file:
+            - ".env"
         ports:
             - "5000:5000"
         volumes:
             - ./app:/statice/app:ro
 
-    inquisitor:
+    daemon:
         image: statice
-        container_name: statice_inquisitor
-        command: flask inquisitor
+        container_name: statice_daemon
+        command: flask daemon
         depends_on:
-            - db
             - redis
-        volumes:
-            - ./app:/statice/app:ro
-
-    janitor:
-        image: statice
-        container_name: statice_janitor
-        command: flask janitor
-        depends_on:
             - db
+        env_file:
+            - ".env"
         volumes:
             - ./app:/statice/app:ro
 
@@ -38,22 +33,22 @@ services:
         command: flask rq worker
         depends_on:
             - redis
+        env_file:
+            - ".env"
         volumes:
             - ./app:/statice/app:ro
-
-    db:
-        image: postgres:12
-        container_name: statice_db
-        environment:
-            - POSTGRES_DB=postgres
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
-        volumes:
-            - postgres_data:/var/lib/postgresql/data
 
     redis:
         image: redis:5-alpine
         container_name: statice_redis
+
+    db:
+        image: postgres:12
+        container_name: statice_db
+        env_file:
+            - ".env"
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
 
 volumes:
     postgres_data:

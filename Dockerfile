@@ -19,13 +19,9 @@ RUN pip install -r requirements.txt
 RUN apt install
 
 # Copy scripts.
-COPY manage.py entrypoint.sh ./
-RUN chmod u+x entrypoint.sh
+COPY manage.py docker-entrypoint.sh ./
+RUN chmod u+x docker-entrypoint.sh
 
 # Configure Flask.
 ENV FLASK_APP=manage.py
-ENV FLASK_ENV=development
-ENV FLASK_DEBUG=True
-
-# Configure security.
 EXPOSE 5000
