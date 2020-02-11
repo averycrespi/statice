@@ -1,40 +1,37 @@
-{% extends "bootstrap/base.html" %}
+{% from "bootstrap/utils.html" import render_messages %}
+{% import "macros.j2" as macros %}
 
-{% block title %}Statice{% endblock %}
+<!doctype html>
+<html lang="en">
+    <head>
+        {% block head %}
+            <!-- Required meta tags -->
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-{% block styles %}
-{{ super() }}
-<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-yrfSO0DBjS56u5M+SjWTyAHujrkiYVtRYh2dtB3yLQtUz3bodOeialO59u5lUCFF" crossorigin="anonymous">
-{% endblock %}
+            {% block styles %}
+                {{ bootstrap.load_css() }}
+                {{ macros.load_theme() }}
+            {% endblock %}
 
-{% block scripts %}
-{{ super() }}
-{{ moment.include_moment() }}
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
-{% endblock %}
+            {% block title %}
+                <title>Title</title>
+            {% endblock %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container">
+            <a href="{{ url_for("main.dashboard") }}">Dashboard</a>
+            <a href="{{ url_for("checks.checks") }}">Checks</a>
 
-{% block navbar %}
-<nav class="navbar navbar-expand navbar-dark bg-primary rounded-0">
-    <a class="navbar-brand" href="{{ url_for("main.dashboard") }}">
-        <h1>Statice</h1>
-    </a>
-    <div class="collapse navbar-collapse">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link" href="{{ url_for("checks.checks") }}">Checks</a>
+            {{ render_messages() }}
+            {% block app_content %}{% endblock %}
         </div>
-    </div>
-</nav>
-{% endblock %}
 
-{% block content %}
-<div class="container">
-    {% with messages = get_flashed_messages(with_categories=True) %}
-    {% if messages %}
-    {% for category, message in messages %}
-    <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-    {% block app_content %}{% endblock %}
-</div>
-{% endblock %}
+        {% block scripts %}
+            {{ bootstrap.load_js() }}
+            {{ moment.include_moment() }}
+            {{ macros.include_chart() }}
+        {% endblock %}
+    </body>
+</html>
