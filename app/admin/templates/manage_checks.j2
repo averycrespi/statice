@@ -3,9 +3,9 @@
 {% from "bootstrap/form.html" import render_form %}
 
 {% block app_content %}
-<div class="container">
+<div class="container shadow">
     <div class="row">
-        <div class="col-8">
+        <div class="col">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -39,8 +39,9 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="row">
         <div class="col-4">
-            <h3 class="text-muted">Create a new check</h3>
             {{ render_form(form, button_map={"submit": "success"}, form_type="horizontal") }}
         </div>
     </div>

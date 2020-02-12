@@ -6,30 +6,7 @@
     {% endif %}
     <div class="card-columns">
         {% for card in cards %}
-            <div class="card border-{{ card.check.status }}">
-                <h3 class="card-header">
-                    <a class="text-{{ card.check.status }}" href="{{ url_for("dashboard.view_check", id=card.check.id) }}">{{ card.check.name }}</a>
-                </h1>
-                <div class="card-body">
-                    <a class="card-subtitle text-muted" href="{{ card.check.url }}">{{ card.check.url }}</a>
-                </div>
-                {% if card.recent %}
-                    <div class="card-body">
-                        <table class="table">
-                            <tbody>
-                                {% for response in card.recent %}
-                                    <tr>
-                                        <td>
-                                            <span class="text-{{ response.status }}">{{ response.description }}</span>
-                                            <span class="text-muted">{{ moment(response.start_time).fromNow() }}</span>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                {% endif %}
-            </div>
+            {% include "_card.j2" %}
         {% endfor %}
     </div>
 {% endblock %}
