@@ -6,37 +6,34 @@ services:
         image: statice
         container_name: statice_web
         command: ./docker-entrypoint.sh
+        stop_grace_period: 1s
         depends_on:
             - db
         env_file:
             - ".env"
         ports:
             - "5000:5000"
-        volumes:
-            - ./app:/statice/app:ro
 
     daemon:
         image: statice
         container_name: statice_daemon
         command: flask daemon
+        stop_grace_period: 1s
         depends_on:
             - redis
             - db
         env_file:
             - ".env"
-        volumes:
-            - ./app:/statice/app:ro
 
     worker:
         image: statice
         container_name: statice_worker
         command: flask rq worker
+        stop_grace_period: 1s
         depends_on:
             - redis
         env_file:
             - ".env"
-        volumes:
-            - ./app:/statice/app:ro
 
     redis:
         image: redis:5-alpine

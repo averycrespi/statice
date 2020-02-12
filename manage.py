@@ -1,5 +1,5 @@
 from app import create_app
-from app.background import Daemon
+from app.daemon import Daemon
 from app.config import Config
 
 

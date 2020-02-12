@@ -1,0 +1,40 @@
+{% extends "base.j2" %}
+
+{% block scripts %}
+    {{ super() }}
+    {% include "_chart.j2" %}
+{% endblock %}
+
+{% block app_content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-{{ check.status }}">{{ check.name }}</h1>
+                <a class="text-muted" href="{{ check.url }}">{{ check.url }}</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <canvas id="chart" height="400" style='width: 100%;'></canvas>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <br>
+                <h3>History</h3>
+                <table class="table">
+                    <tbody>
+                        {% for response in check.responses|sort(attribute="start_time", reverse=True) %}
+                            <tr>
+                                <td>
+                                    <span class="text-{{ response.status }}">{{ response.description }}</span>
+                                    <span class="text-muted">{{ moment(response.start_time).fromNow() }}</span>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -7,15 +7,19 @@ from wtforms.validators import (
     URL,
 )
 
-from app.checks.models import Check
+from app.models import Check
 
 
 class BaseCheckForm(FlaskForm):
+    """Base class for check-related forms."""
+
     name = StringField("Name", validators=[DataRequired()])
     url = StringField("URL", validators=[DataRequired(), URL(), Length(max=2048)],)
 
 
 class CreateCheckForm(BaseCheckForm):
+    """Create a new check."""
+
     submit = SubmitField("Create")
 
     def validate_name(self, name):
@@ -24,10 +28,14 @@ class CreateCheckForm(BaseCheckForm):
 
 
 class EditCheckForm(BaseCheckForm):
+    """Edit a check."""
+
     submit = SubmitField("Save")
     cancel = SubmitField("Cancel")
 
 
 class DeleteCheckForm(FlaskForm):
+    """Delete a check."""
+
     submit = SubmitField("Delete")
     cancel = SubmitField("Cancel")

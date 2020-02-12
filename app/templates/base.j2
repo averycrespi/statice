@@ -22,7 +22,7 @@
     <body>
         <div class="container">
             <a href="{{ url_for("dashboard.dashboard") }}">Dashboard</a>
-            <a href="{{ url_for("checks.checks") }}">Checks</a>
+            <a href="{{ url_for("admin.manage_checks") }}">Checks</a>
 
             {{ render_messages() }}
             {% block app_content %}{% endblock %}

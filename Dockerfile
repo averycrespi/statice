@@ -18,7 +18,8 @@ RUN python -m venv $VIRTUAL_ENV
 RUN pip install -r requirements.txt
 RUN apt install
 
-# Copy scripts.
+# Copy app files.
+COPY app app
 COPY manage.py docker-entrypoint.sh ./
 RUN chmod u+x docker-entrypoint.sh
 

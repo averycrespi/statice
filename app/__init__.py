@@ -26,10 +26,10 @@ def create_app(config_class):
     moment.init_app(app)
     rq.init_app(app)
 
-    from app.checks import bp as checks_bp
+    from app.admin import bp as admin_bp
     from app.dashboard import bp as dashboard_bp
 
-    app.register_blueprint(checks_bp, url_prefix="/checks")
+    app.register_blueprint(admin_bp)
     app.register_blueprint(dashboard_bp)
 
     from app.errors import page_not_found
