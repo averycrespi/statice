@@ -4,8 +4,8 @@ import os
 class Config:
     """Configures the application."""
 
-    STATICE_DAEMON_INTERVAL = os.environ.get("STATICE_DAEMON_INTERVAL") or 10
-    STATICE_REQUEST_TIMEOUT = os.environ.get("STATICE_REQUEST_TIMEOUT") or 3
+    STATICE_DAEMON_INTERVAL = os.environ.get("STATICE_DAEMON_INTERVAL") or 30
+    STATICE_REQUEST_TIMEOUT = os.environ.get("STATICE_REQUEST_TIMEOUT") or 5
 
     SECRET_KEY = os.environ.get("SECRET_KEY") or "change-me"
 

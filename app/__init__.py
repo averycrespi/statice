@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from flask_moment import Moment
 from flask_rq2 import RQ
 from flask_sqlalchemy import SQLAlchemy
+import logging
 
 
 bootstrap = Bootstrap()
@@ -17,6 +18,7 @@ def create_app(config_class):
     """Create an application instance."""
     app = Flask(__name__)
     app.config.from_object(config_class)
+    app.logger.setLevel(logging.INFO)
 
     bootstrap.init_app(app)
     db.init_app(app)
