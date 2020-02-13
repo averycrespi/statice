@@ -19,7 +19,7 @@ remove:
 # Seed the database.
 .PHONY: seed
 seed: start
-	docker exec -it statice_worker flask seed
+	docker exec -it statice_web flask seed
 
 # Start all containers.
 .PHONY: start

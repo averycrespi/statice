@@ -22,9 +22,10 @@ RUN apt install
 ENV FLASK_APP=manage.py
 
 # Copy app files.
-COPY manage.py docker-entrypoint.sh ./
-RUN chmod u+x docker-entrypoint.sh
+COPY manage.py ./
 COPY app app
+COPY scripts scripts
+RUN chmod u+x scripts/*
 
 # Configure Flask.
 EXPOSE 5000
