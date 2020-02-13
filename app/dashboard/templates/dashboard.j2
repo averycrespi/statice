@@ -1,12 +1,23 @@
 {% extends "base.j2" %}
 
 {% block app_content %}
-    {% if not cards %}
-        <h1 align="center" class="text-muted">No checks found.</h1>
-    {% endif %}
-    <div class="card-columns m-3">
-        {% for card in cards %}
-            {% include "_card.j2" %}
-        {% endfor %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {% if not cards %}
+                    <h1 align="center" class="text-muted">No checks found.</h1>
+                {% endif %}
+                <div class="card-columns m-3">
+                    {% for card in cards %}
+                        {% include "_card.j2" %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-1 m-3">
+                <a href="{{ url_for("admin.manage_checks") }}">Admin</a>
+            </div>
+        </div>
     </div>
 {% endblock %}
