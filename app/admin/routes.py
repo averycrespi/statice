@@ -9,7 +9,7 @@ from app.models import Check, Status
 @bp.route("/checks", methods=["GET", "POST"])
 def manage_checks():
     """Manage checks."""
-    return render_template("manage_checks.j2", checks=Check.query.all())
+    return render_template("manage_checks.j2", checks=sorted(Check.query.all()))
 
 
 @bp.route("/checks/create", methods=["GET", "POST"])
