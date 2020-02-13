@@ -18,11 +18,13 @@ RUN python -m venv $VIRTUAL_ENV
 RUN pip install -r requirements.txt
 RUN apt install
 
-# Copy app files.
-COPY app app
-COPY manage.py docker-entrypoint.sh ./
-RUN chmod u+x docker-entrypoint.sh
-
 # Configure Flask.
 ENV FLASK_APP=manage.py
+
+# Copy app files.
+COPY manage.py docker-entrypoint.sh ./
+RUN chmod u+x docker-entrypoint.sh
+COPY app app
+
+# Configure Flask.
 EXPOSE 5000
