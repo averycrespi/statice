@@ -16,6 +16,11 @@ export:
 remove:
 	docker-compose down -v
 
+# Seed the database.
+.PHONY: seed
+seed: start
+	docker exec -it statice_worker flask seed
+
 # Start all containers.
 .PHONY: start
 start:
