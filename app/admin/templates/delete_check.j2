@@ -5,9 +5,9 @@
 {% block app_content %}
     <div class="container shadow m-3">
         <div class="row justify-content-center">
-            <div class="col-6">
-                <h1 class="text-muted">Are you sure that you want to delete {{ check.name }}?</h1>
-                <h3 class="text-danger">This action cannot be undone.</h3>
+            <div class="col m-3">
+                <h3>Are you sure that you want to delete {{ check.name }}?</h3>
+                <h6 class="text-danger">This action cannot be undone.</h6>
                 <br>
                 {{ render_form(delete_form, button_map={"submit": "danger", "cancel": "secondary"}) }}
             </div>
