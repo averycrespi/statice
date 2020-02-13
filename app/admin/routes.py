@@ -1,54 +1,27 @@
-import arrow
 from flask import abort, current_app, flash, redirect, render_template, url_for
-from flask_login import login_required
 
 from app import db
-from app.models import Check, Event, Status
-from app.checks import bp
-from app.checks.forms import CreateCheckForm, DeleteCheckForm, EditCheckForm
+from app.admin import bp
+from app.admin.forms import CreateCheckForm, DeleteCheckForm, EditCheckForm
+from app.models import Check, Status
 
 
 @bp.route("/checks", methods=["GET", "POST"])
-@login_required
-def checks():
+def manage_checks():
     """Manage and create checks."""
     form = CreateCheckForm()
     if form.validate_on_submit():
         check = Check(name=form.name.data, url=form.url.data, status=Status.INFO,)
         db.session.add(check)
-        db.session.flush()
-        event = Event(
-            check_id=check.id,
-            message=f"Check {check.name} has been created",
-            status=Status.INFO,
-        )
-        db.session.add(event)
         db.session.commit()
         flash(f"Check {check.name} has been created.", category=Status.INFO)
-        current_app.logger.info("created check: %s", check.name)
-        return redirect(url_for("checks.checks"))
+        current_app.logger.info("Created check: %s", str(check))
+        return redirect(url_for("admin.manage_checks"))
     return render_template("manage_checks.j2", checks=Check.query.all(), form=form)
 
 
-@bp.route("/checks/<id>")
-def view(id):
-    """View a check by ID."""
-    check = Check.query.filter_by(id=id).first()
-    if check is None:
-        abort(404)
-    responses = sorted(check.responses)[-25:]
-    return render_template(
-        "view_check.j2",
-        check=check,
-        legend="Response Time (ms)",
-        labels=[arrow.get(r.start_time).humanize() for r in responses],
-        values=[r.elapsed_ms for r in responses],
-    )
-
-
 @bp.route("/checks/edit/<id>", methods=["GET", "POST"])
-@login_required
-def edit(id):
+def edit_check(id):
     """Edit a check by ID."""
     check = Check.query.filter_by(id=id).first()
     if check is None:
@@ -56,20 +29,19 @@ def edit(id):
     form = EditCheckForm(obj=check)
     if form.validate_on_submit():
         if form.cancel.data:
-            return redirect(url_for("checks.checks"))
+            return redirect(url_for("admin.manage_checks"))
         check.name = form.name.data
         check.url = form.url.data
         db.session.add(check)
         db.session.commit()
         flash(f"Check {check.name} has been saved.", category=Status.INFO)
-        current_app.logger.info("saved check: %s", check.name)
-        return redirect(url_for("checks.checks"))
+        current_app.logger.info("Saved check: %s", str(check))
+        return redirect(url_for("admin.manage_checks"))
     return render_template("edit_check.j2", form=form)
 
 
 @bp.route("/checks/delete/<id>", methods=["GET", "POST"])
-@login_required
-def delete(id):
+def delete_check(id):
     """Delete a check by ID."""
     check = Check.query.filter_by(id=id).first()
     if check is None:
@@ -77,11 +49,11 @@ def delete(id):
     form = DeleteCheckForm()
     if form.validate_on_submit():
         if form.cancel.data:
-            return redirect(url_for("checks.checks"))
+            return redirect(url_for("admin.manage_checks"))
         # TODO: implement cascade deletion
         db.session.delete(check)
         db.session.commit()
         flash(f"Check {check.name} has been deleted.", category=Status.WARNING)
-        current_app.logger.warning("deleted check: %s", check.name)
-        return redirect(url_for("checks.checks"))
+        current_app.logger.warning("Deleted check: %s", str(check))
+        return redirect(url_for("admin.manage_checks"))
     return render_template("delete_check.j2", check=check, form=form)

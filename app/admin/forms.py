@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import (
     DataRequired,
+    Length,
     ValidationError,
     URL,
 )
@@ -9,26 +10,32 @@ from wtforms.validators import (
 from app.models import Check
 
 
-class CheckForm(FlaskForm):
-    """Base class for creating or editing a check."""
+class BaseCheckForm(FlaskForm):
+    """Base class for check-related forms."""
 
     name = StringField("Name", validators=[DataRequired()])
-    url = StringField("URL", validators=[DataRequired(), URL()])
+    url = StringField("URL", validators=[DataRequired(), URL(), Length(max=2048)],)
 
 
-class CreateCheckForm(CheckForm):
+class CreateCheckForm(BaseCheckForm):
+    """Create a new check."""
+
     submit = SubmitField("Create")
 
     def validate_name(self, name):
         if Check.query.filter_by(name=name.data).first() is not None:
-            raise ValidationError("Please use a unique check name.")
+            raise ValidationError("Please enter a unique name.")
 
 
-class EditCheckForm(CheckForm):
+class EditCheckForm(BaseCheckForm):
+    """Edit a check."""
+
     submit = SubmitField("Save")
     cancel = SubmitField("Cancel")
 
 
 class DeleteCheckForm(FlaskForm):
+    """Delete a check."""
+
     submit = SubmitField("Delete")
     cancel = SubmitField("Cancel")

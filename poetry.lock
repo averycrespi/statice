@@ -182,17 +182,6 @@ dotenv = ["python-dotenv"]
 
 [[package]]
 category = "main"
-description = "User session management for Flask"
-name = "flask-login"
-optional = false
-python-versions = "*"
-version = "0.4.1"
-
-[package.dependencies]
-Flask = "*"
-
-[[package]]
-category = "main"
 description = "SQLAlchemy database migrations for Flask applications using Alembic"
 name = "flask-migrate"
 optional = false
@@ -600,7 +589,7 @@ version = "2.2.1"
 locale = ["Babel (>=1.3)"]
 
 [metadata]
-content-hash = "097c5dd00bad53d7fe12e91887d0aedca475759062a92b52a7bd726656fa8cf5"
+content-hash = "be85f779a5f43ac16fc4077a29c9acee2776fafeb216552a1a99e4927d83505c"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -662,9 +651,6 @@ flake8 = [
 flask = [
     {file = "Flask-1.1.1-py2.py3-none-any.whl", hash = "sha256:45eb5a6fd193d6cf7e0cf5d8a5b31f83d5faae0293695626f539a823e93b13f6"},
     {file = "Flask-1.1.1.tar.gz", hash = "sha256:13f9f196f330c7c2c5d7a5cf91af894110ca0215ac051b5844701f2bfd934d52"},
-]
-flask-login = [
-    {file = "Flask-Login-0.4.1.tar.gz", hash = "sha256:c815c1ac7b3e35e2081685e389a665f2c74d7e077cb93cecabaea352da4752ec"},
 ]
 flask-migrate = [
     {file = "Flask-Migrate-2.5.2.tar.gz", hash = "sha256:a96ff1875a49a40bd3e8ac04fce73fdb0870b9211e6168608cbafa4eb839d502"},

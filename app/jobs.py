@@ -9,27 +9,30 @@ from requests.exceptions import (
 )
 
 from app import rq
-from app.models import Response
+from app.models import Response, Status
 
 
 @rq.job
 def send_request(check, timeout):
     """Send an HTTP GET request for a check."""
-    ok = False
     start_time = datetime.utcnow()
     try:
-        resp = requests.get(check.url, timeout=timeout)
-        ok = resp.ok
+        r = requests.get(check.url, timeout=timeout)
+        status = Status.SUCCESS if r.status_code < 400 else Status.FAILURE
         description = "HTTP {code}: {msg}".format(
-            code=resp.status_code, msg=http.client.responses[resp.status_code]
+            code=r.status_code, msg=http.client.responses[r.status_code]
         )
     except ConnectionError:
+        status = Status.FAILURE
         description = "Error: connection failed"
     except Timeout:
+        status = Status.FAILURE
         description = "Error: request timed out"
     except TooManyRedirects:
+        status = Status.FAILURE
         description = "Error: too many redirects"
     except RequestException as e:
+        status = Status.FAILURE
         description = "Unknown error: {}".format(str(e))
     finally:
         elapsed_ms = int((datetime.utcnow() - start_time).total_seconds() * 1000)
@@ -37,6 +40,6 @@ def send_request(check, timeout):
             check_id=check.id,
             start_time=start_time,
             elapsed_ms=elapsed_ms,
-            ok=ok,
+            status=status,
             description=description,
         )

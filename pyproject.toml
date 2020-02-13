@@ -11,13 +11,13 @@ flask = "^1.1.1"
 flask-wtf = "^0.14.2"
 flask-sqlalchemy = "^2.4.1"
 requests = "^2.22.0"
-flask-login = "^0.4.1"
 flask-migrate = "^2.5.2"
 flask-moment = "^0.9.0"
 psycopg2 = "^2.8.4"
 flask-rq2 = "^18.3"
 arrow = "^0.15.5"
 bootstrap-flask = "^1.2.0"
+rq_scheduler = "^0.9.1"
 
 [tool.poetry.dev-dependencies]
 black = {version = "^19.10b0", allow-prereleases = true}

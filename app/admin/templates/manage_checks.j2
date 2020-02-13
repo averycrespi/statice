@@ -1,0 +1,49 @@
+{% extends "base.j2" %}
+
+{% from "bootstrap/form.html" import render_form %}
+
+{% block app_content %}
+    <div class="container shadow">
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">URL</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if not checks %}
+                            <tr class="table">
+                                <td class="text-muted">No checks found.</td>
+                                <td class="text-muted"></td>
+                                <td class="text-muted"></td>
+                            </tr>
+                        {% endif %}
+                        {% for check in checks %}
+                            <tr class="table">
+                                <th scope="row">
+                                    <a class="text-{{ check.status }}" href="{{ url_for("dashboard.view_check", id=check.id) }}">{{ check.name }}</a>
+                                </th>
+                                <td>
+                                    <a class="text-muted" href="{{ check.url }}">{{ check.url }}</a>
+                                </td>
+                                <td align="right">
+                                    <a class="btn btn-primary" role="button" href="{{ url_for("admin.edit_check", id=check.id) }}">Edit</a>
+                                    <a class="btn btn-danger" role="button" href="{{ url_for("admin.delete_check", id=check.id) }}">Delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                {{ render_form(form, button_map={"submit": "success"}, form_type="horizontal") }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

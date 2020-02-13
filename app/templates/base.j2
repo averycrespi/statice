@@ -21,11 +21,20 @@
     </head>
     <body>
         <div class="container">
-            <a href="{{ url_for("main.dashboard") }}">Dashboard</a>
-            <a href="{{ url_for("checks.checks") }}">Checks</a>
-
             {{ render_messages() }}
             {% block app_content %}{% endblock %}
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="{{ url_for("dashboard.dashboard") }}">Dashboard</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="{{ url_for("admin.manage_checks") }}">Admin</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
 
         {% block scripts %}

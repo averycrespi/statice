@@ -7,5 +7,4 @@ do
     flask db migrate
 done
 
-flask create_user
 flask run --host=0.0.0.0
