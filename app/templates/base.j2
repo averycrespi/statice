@@ -15,27 +15,32 @@
             {% endblock %}
 
             {% block title %}
-                <title>Title</title>
+                {% if title %}
+                    <title>{{ title }}</title>
+                {% else %}
+                    <title>Statice</title>
+                {% endif %}
             {% endblock %}
         {% endblock %}
     </head>
     <body>
         <div class="container">
-            {{ render_messages() }}
-            {% block app_content %}{% endblock %}
-            <footer class="footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-6">
-                            <a href="{{ url_for("dashboard.dashboard") }}">Dashboard</a>
-                        </div>
-                        <div class="col-6">
-                            <a href="{{ url_for("admin.manage_checks") }}">Admin</a>
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col">
+                    {{ render_messages() }}
                 </div>
-            </footer>
-        </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    {% block app_content %}{% endblock %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a href="{{ url_for("dashboard.dashboard") }}">Dashboard</a>
+                    <a href="{{ url_for("admin.manage_checks") }}">Admin</a>
+                </div>
+            </div>
 
         {% block scripts %}
             {{ bootstrap.load_js() }}

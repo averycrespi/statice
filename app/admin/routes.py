@@ -8,7 +8,13 @@ from app.models import Check, Status
 
 @bp.route("/checks", methods=["GET", "POST"])
 def manage_checks():
-    """Manage and create checks."""
+    """Manage checks."""
+    return render_template("manage_checks.j2", checks=Check.query.all())
+
+
+@bp.route("/checks/create", methods=["GET", "POST"])
+def create_check():
+    """Create a new check."""
     form = CreateCheckForm()
     if form.validate_on_submit():
         check = Check(name=form.name.data, url=form.url.data, status=Status.INFO,)
@@ -17,7 +23,7 @@ def manage_checks():
         flash(f"Check {check.name} has been created.", category=Status.INFO)
         current_app.logger.info("Created check: %s", str(check))
         return redirect(url_for("admin.manage_checks"))
-    return render_template("manage_checks.j2", checks=Check.query.all(), form=form)
+    return render_template("create_check.j2", create_form=form)
 
 
 @bp.route("/checks/edit/<id>", methods=["GET", "POST"])
@@ -37,7 +43,7 @@ def edit_check(id):
         flash(f"Check {check.name} has been saved.", category=Status.INFO)
         current_app.logger.info("Saved check: %s", str(check))
         return redirect(url_for("admin.manage_checks"))
-    return render_template("edit_check.j2", form=form)
+    return render_template("edit_check.j2", edit_form=form)
 
 
 @bp.route("/checks/delete/<id>", methods=["GET", "POST"])
@@ -56,4 +62,4 @@ def delete_check(id):
         flash(f"Check {check.name} has been deleted.", category=Status.WARNING)
         current_app.logger.warning("Deleted check: %s", str(check))
         return redirect(url_for("admin.manage_checks"))
-    return render_template("delete_check.j2", check=check, form=form)
+    return render_template("delete_check.j2", check=check, delete_form=form)
