@@ -4,7 +4,7 @@
     {% if not cards %}
         <h1 align="center" class="text-muted">No checks found.</h1>
     {% endif %}
-    <div class="card-columns">
+    <div class="card-columns m-3">
         {% for card in cards %}
             {% include "_card.j2" %}
         {% endfor %}
