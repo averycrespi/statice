@@ -14,6 +14,10 @@ class Check(db.Model):  # type: ignore
 
     responses = db.relationship("Response")
 
+    def __lt__(self, other):
+        # Sort checks by name.
+        return self.name < other.name
+
     def __repr__(self):
         return f"Check({self.name}, {self.url}, {self.status})"
 

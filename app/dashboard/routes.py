@@ -9,7 +9,7 @@ from app.dashboard import bp
 @bp.route("/dashboard")
 def dashboard():
     """View the dashboard."""
-    cards = [Card(check) for check in Check.query.all()]
+    cards = [Card(check) for check in sorted(Check.query.all())]
     return render_template("dashboard.j2", cards=cards)
 
 
