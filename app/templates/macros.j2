@@ -11,3 +11,15 @@
         crossorigin="anonymous">
     </script>
 {% endmacro %}
+
+{% macro to_admin() %}
+    <a href="{{ url_for("admin.manage_checks") }}">
+        <img src="{{ url_for("static", filename="bootstrap-icons/icons/lock.svg") }}" width="50" height="50" alt="Admin"/>
+    </a>
+{% endmacro %}
+
+{% macro to_home() %}
+    <a href="{{ url_for("dashboard.dashboard") }}">
+        <img src="{{ url_for("static", filename="bootstrap-icons/icons/house.svg") }}" width="50" height="50" alt="Home"/>
+    </a>
+{% endmacro %}

@@ -1,5 +1,7 @@
 {% extends "base.j2" %}
 
+{% import "macros.j2" as macros %}
+
 {% block app_content %}
     <div class="container">
         <div class="row">
@@ -14,9 +16,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="container">
         <div class="row justify-content-center">
-            <div class="col-1 m-3">
-                <a href="{{ url_for("admin.manage_checks") }}">Admin</a>
+            <div class="col-1">
+                {{ macros.to_admin() }}
             </div>
         </div>
     </div>

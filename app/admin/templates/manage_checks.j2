@@ -1,6 +1,7 @@
 {% extends "base.j2" %}
 
 {% from "bootstrap/form.html" import render_form %}
+{% import "macros.j2" as macros %}
 
 {% block app_content %}
     <div class="container shadow m-3">
@@ -31,8 +32,12 @@
                                     <a class="text-muted" href="{{ check.url }}">{{ check.url }}</a>
                                 </td>
                                 <td align="right">
-                                    <a class="btn btn-primary" role="button" href="{{ url_for("admin.edit_check", id=check.id) }}">Edit</a>
-                                    <a class="btn btn-danger" role="button" href="{{ url_for("admin.delete_check", id=check.id) }}">Delete</a>
+                                    <a class="btn btn-warning" role="button" href="{{ url_for("admin.edit_check", id=check.id) }}">
+                                        <img src="{{ url_for("static", filename="bootstrap-icons/icons/pencil.svg") }}" alt="Edit check"/>
+                                    </a>
+                                    <a class="btn btn-danger" role="button" href="{{ url_for("admin.delete_check", id=check.id) }}">
+                                        <img src="{{ url_for("static", filename="bootstrap-icons/icons/trash.svg") }}" alt="Delete check"/>
+                                    </a>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -40,12 +45,18 @@
                 </table>
             </div>
         </div>
-        <div class="row justify-content-between">
-            <div class="col-1 m-3">
-                <a class="btn btn-success" role="button" href="{{ url_for("admin.create_check") }}">Create</a>
+        <div class="row">
+            <div class="col m-3">
+                <a class="btn btn-success" role="button" href="{{ url_for("admin.create_check") }}">
+                    <img src="{{ url_for("static", filename="bootstrap-icons/icons/plus.svg") }}" alt="Create check"/>
+                </a>
             </div>
-            <div class="col-2 m-3">
-                <a class="btn btn-secondary" role="button" href="{{ url_for("dashboard.dashboard") }}">Back to dashboard</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-1">
+                {{ macros.to_home() }}
             </div>
         </div>
     </div>

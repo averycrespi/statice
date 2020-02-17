@@ -1,5 +1,7 @@
 {% extends "base.j2" %}
 
+{% import "macros.j2" as macros %}
+
 {% block scripts %}
     {{ super() }}
     {% include "_chart.j2" %}
@@ -34,6 +36,13 @@
                         {% endfor %}
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-1">
+                {{ macros.to_home() }}
             </div>
         </div>
     </div>
