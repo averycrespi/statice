@@ -1,0 +1,3 @@
+[submodule "app/static/icons"]
+	path = app/static/bootstrap-icons
+	url = https://github.com/twbs/icons
