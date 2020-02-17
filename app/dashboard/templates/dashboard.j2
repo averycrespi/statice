@@ -1,7 +1,5 @@
 {% extends "base.j2" %}
 
-{% import "macros.j2" as macros %}
-
 {% block app_content %}
     <div class="container">
         <div class="row">
@@ -14,13 +12,6 @@
                         {% include "_card.j2" %}
                     {% endfor %}
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-1">
-                {{ macros.to_admin() }}
             </div>
         </div>
     </div>
