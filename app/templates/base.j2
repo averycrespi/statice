@@ -20,10 +20,11 @@
         {% endblock %}
     </head>
     <body>
+        {{ render_messages(dismissible=True) }}
         <div class="container">
-            {{ render_messages() }}
             {% block app_content %}{% endblock %}
-        </div>
+        </div><
+        {{ macros.render_nav() }}
 
         {% block scripts %}
             {{ bootstrap.load_js() }}
