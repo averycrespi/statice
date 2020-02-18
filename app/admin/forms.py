@@ -31,11 +31,9 @@ class EditCheckForm(BaseCheckForm):
     """Edit a check."""
 
     submit = SubmitField("Save")
-    cancel = SubmitField("Cancel")
 
 
 class DeleteCheckForm(FlaskForm):
     """Delete a check."""
 
     submit = SubmitField("Delete")
-    cancel = SubmitField("Cancel")
