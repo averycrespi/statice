@@ -8,6 +8,9 @@ app = create_app(Config)
 
 @app.cli.command("daemon")
 def daemon():
-    """Start the daemon."""
+    """Run the daemon."""
     daemon = Daemon()
-    daemon.start()
+    daemon.start(
+        interval=app.config["STATICE_DAEMON_INTERVAL"],
+        timeout=app.config["STATICE_REQUEST_TIMEOUT"],
+    )
