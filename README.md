@@ -60,7 +60,7 @@ cp docker-compose.override.yml.example docker-compose.override.yml
 poetry install
 
 # Update the database migrations (optional).
-#TODO
+#TODO: explain migrations
 
 # Build and start containers.
 docker-compose up -d
