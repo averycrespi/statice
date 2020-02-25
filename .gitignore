@@ -135,3 +135,6 @@ dmypy.json
 
 # Visual Studio Code
 .vscode/
+
+# Docker Compose override
+docker-compose.override.yml
