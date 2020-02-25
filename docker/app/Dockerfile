@@ -6,8 +6,9 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV VIRTUAL_ENV=/opt/venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-# Configure workdir and create user.
-WORKDIR /usr/src/app
+# Configure working directory and create user.
+# Make sure to update supervisord.conf if you change WORKDIR.
+WORKDIR /usr/src/statice
 RUN addgroup --system user && adduser --system --no-create-home --group user
 RUN chown -R user:user /usr/src/app && chmod -R 755 /usr/src/app
 
