@@ -1,11 +1,13 @@
-version: '3'
+version: "3.3"
 
 services:
     web:
-        build: .
-        image: statice
+        build:
+            context: .
+            dockerfile: ./docker/app/Dockerfile
+        image: statice:latest
         container_name: statice_web
-        command: ./scripts/start_web.sh
+        command: ./entrypoint.sh
         stop_grace_period: 1s
         depends_on:
             - db
@@ -15,7 +17,7 @@ services:
             - "5000:5000"
 
     daemon:
-        image: statice
+        image: statice:latest
         container_name: statice_daemon
         command: flask daemon
         stop_grace_period: 1s
@@ -26,9 +28,11 @@ services:
             - ".env"
 
     workers:
-        image: statice
+        build:
+            context: .
+            dockerfile: ./docker/workers/Dockerfile
+        image: statice-workers:latest
         container_name: statice_workers
-        command: ./scripts/start_workers.sh
         stop_grace_period: 1s
         depends_on:
             - redis

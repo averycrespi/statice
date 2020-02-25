@@ -27,6 +27,22 @@
 
 ## Getting Started
 
+Install [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/).
+
+```sh
+# Clone the repository.
+git clone git@github.com:averycrespi/statice.git && cd statice
+
+# Edit environment variables.
+cp .env.example .env
+vim .env
+
+# Build and start containers.
+docker-compose up -d
+```
+
+## Development
+
 Requirements:
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
@@ -34,11 +50,20 @@ Requirements:
 - [Poetry](https://python-poetry.org/)
 
 ```sh
-# Clone the repository
-git clone git@github.com:averycrespi/statice.git
+# Clone the repository.
+git clone git@github.com:averycrespi/statice.git && cd statice
 
-# Build and start containers
-make
+# Enable the Docker compose override.
+cp docker-compose.override.yml.example docker-compose.override.yml
+
+# Create a local virtual environment.
+poetry install
+
+# Update the database migrations (optional).
+#TODO
+
+# Build and start containers.
+docker-compose up -d
 ```
 
 ## Credits
