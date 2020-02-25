@@ -49,7 +49,22 @@ Requirements:
 - [Python](https://www.python.org/) (3.6 or newer)
 - [Poetry](https://python-poetry.org/)
 
-TODO
+```sh
+# Clone the repository.
+git clone git@github.com:averycrespi/statice.git && cd statice
+
+# Enable the Docker compose override.
+cp docker-compose.override.yml.example docker-compose.override.yml
+
+# Create a local virtual environment.
+poetry install
+
+# Update the database migrations (optional).
+#TODO
+
+# Build and start containers.
+docker-compose up -d
+```
 
 ## Credits
 
