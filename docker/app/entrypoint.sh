@@ -7,4 +7,4 @@ do
     flask db migrate
 done
 
-flask run --host=0.0.0.0
+gunicorn --bind 0.0.0.0:5000 manage:app
