@@ -33,9 +33,8 @@ Install [Docker](https://www.docker.com/) and [Docker Compose](https://docs.dock
 # Clone the repository.
 git clone git@github.com:averycrespi/statice.git && cd statice
 
-# Edit environment variables.
+# Set environment variables.
 cp .env.example .env
-vim .env
 
 # Build and start containers.
 docker-compose up -d
