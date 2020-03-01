@@ -28,4 +28,7 @@ class Config:
 class TestingConfig(Config):
     """Configures the application for testing."""
 
+    # Use an in-memory SQLite database.
+    SQLALCHEMY_DATABASE_URI = "sqlite://"
+
     TESTING = True
