@@ -10,7 +10,7 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 # Make sure to update supervisord.conf if you change WORKDIR.
 WORKDIR /usr/src/statice
 RUN addgroup --system user && adduser --system --no-create-home --group user
-RUN chown -R user:user /usr/src/app && chmod -R 755 /usr/src/app
+RUN chown -R user:user /usr/src/statice && chmod -R 755 /usr/src/statice
 
 # Install dependencies.
 RUN apt-get update && apt-get install -y libpq-dev gcc
