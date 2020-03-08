@@ -11,7 +11,7 @@ def test_edit_check(client, session, check):
     assert b"URL" in response.data
     assert check.url in str(response.data)
     assert b"Save" in response.data
-    # TODO: test that check is actually edited
+    # TODO: test that check is changed
 
 
 def test_edit_missing_check(client):
