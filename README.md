@@ -52,14 +52,14 @@ Requirements:
 # Clone the repository.
 git clone git@github.com:averycrespi/statice.git && cd statice
 
-# Enable the Docker compose override.
+# Configure Docker Compose for development.
 cp docker-compose.override.yml.example docker-compose.override.yml
 
 # Create a local virtual environment.
 poetry install
 
-# Update the database migrations (optional).
-#TODO: explain migrations
+# Run tests.
+poetry run py.test
 
 # Build and start containers.
 docker-compose up -d
