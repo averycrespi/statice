@@ -4,8 +4,6 @@ from flask import url_for
 def test_empty_dashboard(client):
     response = client.get(url_for("dashboard.dashboard"))
     assert response.status_code == 200
-    assert b"Home" in response.data
-    assert b"Admin" in response.data
     assert b"No checks found" in response.data
 
 
