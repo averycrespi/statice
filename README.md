@@ -33,7 +33,7 @@ Install [Docker](https://www.docker.com/) and [Docker Compose](https://docs.dock
 # Clone the repository.
 git clone git@github.com:averycrespi/statice.git && cd statice
 
-# Set environment variables.
+# Set environment variables (optional).
 cp .env.example .env
 
 # Build and start containers.
@@ -55,11 +55,11 @@ git clone git@github.com:averycrespi/statice.git && cd statice
 # Configure Docker Compose for development.
 cp docker-compose.override.yml.example docker-compose.override.yml
 
-# Create a local virtual environment.
+# Create a virtual environment.
 poetry install
 
 # Run tests.
-poetry run py.test
+poetry run pytest
 
 # Build and start containers.
 docker-compose up -d
