@@ -1,6 +1,6 @@
 from flask import url_for
 
-from app.models import Check, Status
+from app.models import Check
 
 
 def test_empty_manage_checks(client):
