@@ -1,6 +1,6 @@
 import pytest
 
-from app import create_app, db
+from app import create_app, db as app_db
 from app.config import TestingConfig
 from app.models import Check, Status
 
@@ -12,12 +12,12 @@ def app():
 
 
 @pytest.fixture
-def session(app):
-    """Create a database session."""
+def db(app):
+    """Create a database connection."""
     with app.app_context():
-        db.create_all()
-        yield db.session
-        db.drop_all()
+        app_db.create_all()
+        yield app_db
+        app_db.drop_all()
 
 
 @pytest.fixture
