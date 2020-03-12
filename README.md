@@ -48,6 +48,9 @@ Requirements:
 - [Python](https://www.python.org/) (3.6 or newer)
 - [Poetry](https://python-poetry.org/)
 
+Optionally:
+- [Make](https://www.gnu.org/software/make/)
+
 ```sh
 # Clone the repository.
 git clone git@github.com:averycrespi/statice.git && cd statice
