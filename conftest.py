@@ -1,8 +1,9 @@
+from datetime import datetime
 import pytest
 
 from app import create_app, db as app_db
 from app.config import TestingConfig
-from app.models import Check, Status
+from app.models import Check, Response, Status
 
 
 @pytest.fixture
@@ -23,4 +24,17 @@ def db(app):
 @pytest.fixture
 def check():
     """Create a check."""
-    return Check(name="Example", url="https://example.com", status=Status.INFO)
+    return Check(id=1, name="Example", url="https://example.com", status=Status.INFO)
+
+
+@pytest.fixture
+def response():
+    """Create a response."""
+    return Response(
+        id=1,
+        check_id=1,
+        start_time=datetime.utcnow(),
+        elapsed_ms=50,
+        status=Status.SUCCESS,
+        description="HTTP 200: OK",
+    )
