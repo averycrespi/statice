@@ -1,7 +1,7 @@
 from flask import url_for
 
 
-def test_empty_dashboard(client):
+def test_dashboard_with_no_checks(client):
     """
     WHEN there are no checks
         AND a GET request is sent to the dashboard

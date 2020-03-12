@@ -3,7 +3,7 @@ from flask import url_for
 from app.models import Check
 
 
-def test_empty_manage_checks(client):
+def test_manage_checks_with_no_checks(client):
     """
     WHEN there are no checks
         AND a GET request is sent to manage_checks
@@ -96,13 +96,19 @@ def test_post_edit_check(client, db, check):
     # TODO: check for edits
 
 
-def test_edit_missing_check(client):
+def test_edit_missing_check(client, check):
     """
     GIVEN a new check
-    WHEN a GET request is sent to edit_check
+    WHEN a GET or POST request is sent to edit_check
     THEN the request should fail
     """
-    r = client.get(url_for("admin.edit_check", id=1337))
+    r = client.get(url_for("admin.edit_check", id=check.id))
+    assert r.status_code == 404
+    r = client.post(
+        url_for("admin.edit_check", id=check.id),
+        data={"name": check.name, "url": check.url},
+        follow_redirects=True,
+    )
     assert r.status_code == 404
 
 
@@ -139,8 +145,10 @@ def test_post_delete_check(client, db, check):
 def test_delete_missing_check(client, check):
     """
     GIVEN a new check
-    WHEN a GET request is sent to delete_check
+    WHEN a GET or POST request is sent to delete_check
     THEN the request should fail
     """
     r = client.get(url_for("admin.delete_check", id=1337))
+    assert r.status_code == 404
+    r = client.post(url_for("admin.delete_check", id=check.id), follow_redirects=True,)
     assert r.status_code == 404
