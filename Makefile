@@ -1,8 +1,5 @@
-# Build and start Docker containers.
-.PHONY: start
-start:
-	docker-compose build
-	docker-compose up -d
+.PHONY: all
+all: requirements test
 
 # Create a Poetry virtual environment.
 .PHONY: env
