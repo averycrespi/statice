@@ -55,10 +55,7 @@ Requirements:
 # Clone the repository.
 git clone git@github.com:averycrespi/statice.git && cd statice
 
-# Enable Docker Compose overrides.
-cp docker-compose.override.yml.example docker-compose.override.yml
-
-# Configure the environment for development.
+# Configure the env for development.
 make dev
 ```
 
