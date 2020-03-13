@@ -1,14 +1,14 @@
 .PHONY: all
-all: requirements test
+all: test
 
-# Create a Poetry virtual environment.
-.PHONY: env
-env:
+# Configure the environment for development.
+.PHONY: dev
+dev:
 	poetry install
 
 # Export requirements from Poetry.
-.PHONY: requirements
-requirements:
+.PHONY: req
+req:
 	poetry export -f requirements.txt -o requirements.txt
 
 # Run tests.
