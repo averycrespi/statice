@@ -55,7 +55,7 @@ Requirements:
 # Clone the repository.
 git clone git@github.com:averycrespi/statice.git && cd statice
 
-# Configure the env for development.
+# Configure the environment for development.
 make dev
 ```
 
