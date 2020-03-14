@@ -5,8 +5,8 @@ class Config:
     """Configures the application for Docker."""
 
     # Configure application-specific behaviour.
-    STATICE_DAEMON_INTERVAL = os.environ.get("STATICE_DAEMON_INTERVAL", 30)
-    STATICE_REQUEST_TIMEOUT = os.environ.get("STATICE_REQUEST_TIMEOUT", 5)
+    STATICE_DAEMON_INTERVAL = int(os.environ.get("STATICE_DAEMON_INTERVAL") or 30)
+    STATICE_REQUEST_TIMEOUT = int(os.environ.get("STATICE_REQUEST_TIMEOUT") or 5)
 
     # Configure Flask.
     SECRET_KEY = os.environ.get("SECRET_KEY") or os.urandom(24).hex()
