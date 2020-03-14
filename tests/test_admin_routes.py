@@ -137,9 +137,32 @@ def test_post_delete_check(client, db, check):
     """
     db.session.add(check)
     db.session.commit()
-    r = client.post(url_for("admin.delete_check", id=check.id), follow_redirects=True,)
+    r = client.post(
+        url_for("admin.delete_check", id=check.id),
+        data={"name": check.name},
+        follow_redirects=True,
+    )
     assert r.status_code == 200
     assert Check.query.filter_by(id=check.id).first() is None
+
+
+def test_delete_check_with_incorrect_name(client, db, check):
+    """
+    GIVEN an existing check
+    WHEN a POST request is sent to delete_check
+        AND the name of the check is incorrect
+    THEN the request should succeed
+        AND the check should not be deleted
+    """
+    db.session.add(check)
+    db.session.commit()
+    r = client.post(
+        url_for("admin.delete_check", id=check.id),
+        data={"name": check.name + "incorrect"},
+        follow_redirects=True,
+    )
+    assert r.status_code == 200
+    assert Check.query.filter_by(id=check.id).first() is not None
 
 
 def test_delete_missing_check(client, check):
