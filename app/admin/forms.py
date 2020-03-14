@@ -36,4 +36,7 @@ class EditCheckForm(BaseCheckForm):
 class DeleteCheckForm(FlaskForm):
     """Delete a check."""
 
+    name = StringField(
+        "Enter the check name to confirm deletion", validators=[DataRequired()]
+    )
     submit = SubmitField("Delete")

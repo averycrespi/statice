@@ -52,6 +52,9 @@ def delete_check(id):
         abort(404)
     form = DeleteCheckForm()
     if form.validate_on_submit():
+        if form.name.data != check.name:
+            flash(f"Please enter the name of the check.", category=Status.FAILURE)
+            return redirect(url_for("admin.delete_check", id=check.id))
         # TODO: implement cascade deletion
         db.session.delete(check)
         db.session.commit()

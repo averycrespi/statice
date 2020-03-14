@@ -3,11 +3,10 @@
 {% from "bootstrap/form.html" import render_form %}
 
 {% block app_content %}
-    <div class="container shadow m-3">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col m-3">
                 <h3>Are you sure that you want to delete {{ check.name }}?</h3>
-                <h6 class="text-danger">This action cannot be undone.</h6>
                 {{ render_form(delete_form, button_map={"submit": "danger"}) }}
             </div>
         </div>
