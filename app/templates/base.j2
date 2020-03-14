@@ -21,9 +21,7 @@
     </head>
     <body>
         {{ render_messages(dismissible=True) }}
-        <div class="container">
-            {% block app_content %}{% endblock %}
-        </div>
+        {% block app_content %}{% endblock %}
         {{ macros.render_nav() }}
 
         {% block scripts %}

@@ -1,25 +1,15 @@
 {% extends "base.j2" %}
 
 {% block app_content %}
-    {% if cards %}
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="card-columns m-3">
-                        {% for card in cards %}
-                            {% include "_card.j2" %}
-                        {% endfor %}
-                    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="card-columns m-3">
+                    {% for card in cards %}
+                        {% include "_card.j2" %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
-    {% else %}
-        <div class="container shadow m-3">
-            <div class="row justify-content-center">
-                <div class="col-3">
-                    <h3 class="text-muted">No checks found.</h3>
-                </div>
-            </div>
-        </div>
-    {% endif %}
+    </div>
 {% endblock %}

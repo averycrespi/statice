@@ -1,7 +1,7 @@
 import arrow
-from flask import abort, render_template
+from flask import abort, flash, render_template
 
-from app.models import Card, Check
+from app.models import Card, Check, Status
 from app.dashboard import bp
 
 
@@ -10,6 +10,8 @@ from app.dashboard import bp
 def dashboard():
     """View the dashboard."""
     cards = [Card(check) for check in sorted(Check.query.all())]
+    if len(cards) == 0:
+        flash("No checks found.", category=Status.WARNING)
     return render_template("dashboard.j2", cards=cards)
 
 
