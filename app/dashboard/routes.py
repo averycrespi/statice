@@ -1,7 +1,6 @@
-import arrow
-from flask import abort, flash, render_template
+from flask import abort, current_app, flash, render_template, request
 
-from app.models import Card, Check, Status
+from app.models import Card, Chart, Check, Response, Status
 from app.dashboard import bp
 
 
@@ -21,11 +20,13 @@ def view_check(id):
     check = Check.query.filter_by(id=id).first()
     if check is None:
         abort(404)
-    responses = sorted(check.responses)[-25:]
+    page = request.args.get("page", 1, type=int)
+    pagination = check.responses.order_by(Response.start_time.desc()).paginate(
+        page, current_app.config["STATICE_RESPONSES_PER_PAGE"], False
+    )
     return render_template(
         "view_check.j2",
         check=check,
-        legend="Response Time (ms)",
-        labels=[arrow.get(r.start_time).humanize() for r in responses],
-        values=[r.elapsed_ms for r in responses],
+        chart=Chart(check, max_size=current_app.config["STATICE_MAX_CHART_SIZE"]),
+        pagination=pagination,
     )
