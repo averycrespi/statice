@@ -7,6 +7,8 @@ class Config:
     # Configure application-specific behaviour.
     STATICE_DAEMON_INTERVAL = int(os.environ.get("STATICE_DAEMON_INTERVAL") or 30)
     STATICE_REQUEST_TIMEOUT = int(os.environ.get("STATICE_REQUEST_TIMEOUT") or 5)
+    STATICE_RESPONSES_PER_PAGE = int(os.environ.get("STATICE_RESPONSES_PER_PAGE") or 10)
+    STATICE_MAX_CHART_SIZE = int(os.environ.get("STATICE_MAX_CHART_SIZE") or 25)
 
     # Configure Flask.
     SECRET_KEY = os.environ.get("SECRET_KEY") or os.urandom(24).hex()

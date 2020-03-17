@@ -1,3 +1,4 @@
+import arrow
 from datetime import datetime
 
 from app import db
@@ -12,7 +13,7 @@ class Check(db.Model):  # type: ignore
     url = db.Column(db.String())
     status = db.Column(db.String())
 
-    responses = db.relationship("Response")
+    responses = db.relationship("Response", lazy="dynamic")
 
     def __lt__(self, other):
         # Sort checks by name.
@@ -56,3 +57,14 @@ class Card:
     def __init__(self, check):
         self.check = check
         self.recent = sorted(check.responses, reverse=True)[:3]
+
+
+class Chart:
+    """Wraps a check into a chart."""
+
+    def __init__(self, check, max_size=25):
+        recent = sorted(check.responses)[-max_size:]
+        self.check = check
+        self.legend = "Response Time (ms)"
+        self.labels = [arrow.get(r.start_time).humanize() for r in recent]
+        self.values = [r.elapsed_ms for r in recent]

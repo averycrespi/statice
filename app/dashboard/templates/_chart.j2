@@ -5,11 +5,11 @@
     var ctx = document.getElementById("chart").getContext("2d");
 
     var data = {
-        labels: [{% for label in labels %}"{{ label }}", {% endfor %} ],
+        labels: [{% for label in chart.labels %}"{{ label }}", {% endfor %} ],
         datasets: [{
-            label: "{{ legend }}",
+            label: "{{ chart.legend }}",
             backgroundColor: "#f16293",
-            data: [{% for value in values %}{{ value }}, {% endfor %}],
+            data: [{% for value in chart.values %}{{ value }}, {% endfor %}],
         }]
     };
 
