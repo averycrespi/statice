@@ -2,11 +2,16 @@
 all: test
 
 # Configure the environment for development.
-# This command is safe to run multiple times.
 .PHONY: dev
 dev:
-	cp -n docker-compose.override.yml.example docker-compose.override.yml
+	cp docker-compose.override.yml.example docker-compose.override.yml
 	poetry install
+
+# Configure the environment for production.
+.PHONY: prod
+prod:
+	rm -f docker-compose.override.yml
+	poetry install --no-dev
 
 # Export requirements from Poetry.
 # This should be run whenever dependencies are updated.
