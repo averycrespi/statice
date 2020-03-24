@@ -26,6 +26,7 @@ RUN chmod u+x entrypoint.sh
 ENV FLASK_APP=manage.py
 COPY --chown=user:user manage.py .
 COPY --chown=user:user app app
+COPY --chown=user:user migrations migrations
 
 # Run as an unprivileged user.
 USER user

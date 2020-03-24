@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
-# TODO: implement proper schema migration
-until flask db upgrade
-do
-    flask db init
-    flask db migrate
-done
+flask db upgrade
 
-gunicorn --bind 0.0.0.0:5000 manage:app
+if [ "$FLASK_ENV" == "development" ]; then
+    echo "Running in development mode"
+    flask run --host=0.0.0.0
+else
+    echo "Running in production mode"
+    gunicorn --bind 0.0.0.0:5000 manage:app
+fi
