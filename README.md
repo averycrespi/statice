@@ -23,7 +23,7 @@
 
 - Create checks to watch your pages
 - Monitor HTTP status codes and response times
-- Easily tweak performance with environment variables
+- Tweak configuration with environment variables
 
 ## Getting Started
 
@@ -35,11 +35,14 @@ Requirements:
 # Clone the repository.
 git clone git@github.com:averycrespi/statice.git && cd statice
 
-# Set environment variables (optional).
+# Set environment variables.
 cp .env.example .env
 
 # Build and start containers.
 docker-compose up -d
+
+# When you're done: stop and remove containers.
+docker-compose down
 ```
 
 ## Development
@@ -56,6 +59,7 @@ Requirements:
 git clone git@github.com:averycrespi/statice.git && cd statice
 
 # Configure the environment for development.
+# See the Makefile for additional targets.
 make dev
 ```
 
