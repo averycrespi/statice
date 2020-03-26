@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-flask db upgrade
+flask db upgrade || echo "No upgrade necessary"
 
 if [ "$FLASK_ENV" == "development" ]; then
     echo "Running in development mode"
