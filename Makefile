@@ -11,7 +11,7 @@ dev:
 .PHONY: prod
 prod:
 	rm -f docker-compose.override.yml
-	poetry install --no-dev
+	poetry install
 
 # Export requirements from Poetry.
 # This should be run whenever dependencies are updated.
